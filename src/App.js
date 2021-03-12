@@ -2,9 +2,11 @@ import './App.scss';
 import axios from 'axios';
 import Form from './Form.js';
 import { useState } from 'react';
+import Results from './Results.js';
 
 function App() {
   const [userInput, setUserInput] = useState('');
+  const [movie, setMovie] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,8 +22,14 @@ function App() {
         language: 'en-US'
       }
     }).then(response => {
+
+      const movieObject = response.data.results[0];
+
+      setMovie(movieObject)
+      // the title that gets sent to the book api
       const title = response.data.results[0].title;
-      console.log('Movie: ', title);
+
+      console.log(movieObject)
         axios({
         method: 'GET',
         url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -32,8 +40,8 @@ function App() {
           Key: 'AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg'
         }
       }).then(response => {
-        const bookTitle = response.data.items[0].volumeInfo.title;
-        console.log('Book: ', bookTitle);
+        const bookResults = response.data.items[0].volumeInfo
+        console.log(bookResults)
       });
     });
   }
@@ -42,6 +50,8 @@ function App() {
     <div className="App">
       <h1>Is the book better?</h1>
       <Form userInput={userInput} handleSubmit={handleSubmit} setUserInput={setUserInput}/>
+
+      <Results movie={movie} />
     </div>
   );
 }
