@@ -2,12 +2,15 @@ import './App.scss';
 import axios from 'axios';
 import Form from './Form.js';
 import { useState } from 'react';
-import Results from './Results.js';
+import MovieResults from './MovieResults.js';
+import BookResults from './BookResults.js';
 
 function App() {
+  
   const [userInput, setUserInput] = useState('');
   const [movie, setMovie] = useState({});
-
+  const [book, setBook] = useState({});
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     axios({
@@ -41,7 +44,9 @@ function App() {
         }
       }).then(response => {
         const bookResults = response.data.items[0].volumeInfo
+ 
         console.log(bookResults)
+        setBook(bookResults)
       });
     });
   }
@@ -51,9 +56,13 @@ function App() {
       <h1>Is the book better?</h1>
       <Form userInput={userInput} handleSubmit={handleSubmit} setUserInput={setUserInput}/>
 
-      <Results movie={movie} />
+      <section className="results">
+        <MovieResults movie={movie} />
+        <BookResults book={book} />
+      </section>
     </div>
   );
+
 }
 
 export default App;
