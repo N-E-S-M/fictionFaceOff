@@ -29,12 +29,39 @@ function App() {
     },
   ]);
   const [searchMultipleBooks, setSearchMultipleBooks] = useState([]);
-
   const [bookButtonValue, setBookButtonValue] = useState('');
+  const [returnedBooks, setReturnedBooks] = useState([]);
+  const [returnedMovie, setReturnedMovie] = useState();
 
   const handleBookChoice = (clickedButton) => {
     setBookButtonValue(clickedButton);
-    console.log(clickedButton);
+    if (bookButtonValue !== '') {
+      const matchedBook = returnedBooks.filter((item) => {
+        return item.volumeInfo.title === bookButtonValue;
+      })
+      // console.log(matchedBook[0].volumeInfo.title);
+      setResults([
+        {
+          type: "movie",
+          name: returnedMovie.title,
+          description: returnedMovie.overview,
+          rating: Math.round(returnedMovie.vote_average / 2),
+          img: `https://image.tmdb.org/t/p/w200${returnedMovie.poster_path}`,
+          altDescription: `${returnedMovie.title} poster`,
+          id: returnedMovie.id,
+        },
+  
+        {
+          type: "book",
+          name: matchedBook[0].volumeInfo.title,
+          description: matchedBook[0].volumeInfo.description,
+          rating: matchedBook[0].volumeInfo.averageRating,
+          img: matchedBook[0].volumeInfo.imageLinks.thumbnail,
+          altDescription: `${matchedBook[0].volumeInfo.title} cover`,
+          id: matchedBook[0].volumeInfo.industryIdentifiers[0].identifier,
+        },
+      ]);
+    }
   }
 
   const handleSubmit = (e) => {
@@ -54,8 +81,8 @@ function App() {
       },
     }).then((response) => {
       const movieObject = response.data.results[0];
-      console.log(movieObject);
-
+      // console.log(movieObject);
+      setReturnedMovie(movieObject);
       // the title that gets sent to the book api
       const title = response.data.results[0].title;
 
@@ -70,7 +97,7 @@ function App() {
           Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
         },
       }).then((response) => {
-        console.log(response.data.items);
+        // console.log(response.data.items);
         const bookObject = response.data.items[0].volumeInfo;
 
         if (title === bookObject.title) {
@@ -105,8 +132,7 @@ function App() {
               q: title,
               Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
             },
-          }).then(response =>  {
-
+          }).then(response => {
             const size = 5;
             const multipleBooks = response.data.items;
             const newBooksArray = multipleBooks.slice(0, size).map((book) => {
@@ -115,13 +141,13 @@ function App() {
               )
             })
             setSearchMultipleBooks(newBooksArray);
-            
-          } )
+            setReturnedBooks(multipleBooks);
+          })
         }
       });
     });
   };
-  
+
   return (
     <div className="App">
       <h1>Is the book better?</h1>
@@ -132,13 +158,14 @@ function App() {
       />
 
       <ResultsSection results={results} />
-      {searchMultipleBooks.length !== 0 ? (
-        <BookChoice
-          titles={searchMultipleBooks}
-          handleBookChoice={handleBookChoice}
-        />
-      ) : null}
-      {/* <BookChoice titles={searchMultipleBooks} /> */}
+      {
+        searchMultipleBooks.length !== 0 ? (
+          <BookChoice
+            titles={searchMultipleBooks}
+            handleBookChoice={handleBookChoice}
+          />
+        ) : null
+      }
     </div>
   );
 }
