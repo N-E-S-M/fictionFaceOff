@@ -2,14 +2,30 @@ import './App.scss';
 import axios from 'axios';
 import Form from './Form.js';
 import { useState } from 'react';
-import MovieResults from './MovieResults.js';
-import BookResults from './BookResults.js';
+import ResultsSection from './ResultsSection.js';
 
 function App() {
   
   const [userInput, setUserInput] = useState('');
-  const [movie, setMovie] = useState({});
-  const [book, setBook] = useState({});
+  const [results, setResults] = useState([{
+        type: 'movie',
+        name: '',
+        description: '',
+        rating: '',
+        img: '',
+        altDescription: '',
+        id: '1',
+    },
+
+    {
+    type: 'book',
+    name: '',
+    description: '',
+    rating: '',
+    img: '',
+    altDescription: '',
+    id: '2',
+    }]);
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,12 +43,12 @@ function App() {
     }).then(response => {
 
       const movieObject = response.data.results[0];
+      console.log(movieObject);
 
-      setMovie(movieObject)
       // the title that gets sent to the book api
       const title = response.data.results[0].title;
 
-      console.log(movieObject)
+      // console.log(movieObject)
         axios({
         method: 'GET',
         url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -43,10 +59,31 @@ function App() {
           Key: 'AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg'
         }
       }).then(response => {
-        const bookResults = response.data.items[0].volumeInfo
- 
-        console.log(bookResults)
-        setBook(bookResults)
+        console.log(response.data.items);
+        const bookObject = response.data.items[0].volumeInfo
+
+        setResults(
+          [{
+                type: 'movie',
+                name: movieObject.title,
+                description: movieObject.overview,
+                rating: Math.round(movieObject.vote_average / 2),
+                img: `https://image.tmdb.org/t/p/w200${movieObject.poster_path}`,
+                altDescription: `${movieObject.title} poster`,
+                id: movieObject.id,
+            },
+
+            {
+            type: 'book',
+            name: bookObject.title,
+            description: bookObject.description,
+            rating: bookObject.averageRating,
+            img: bookObject.imageLinks.thumbnail,
+            altDescription: `${bookObject.title} cover`,
+            id: bookObject.industryIdentifiers[0].identifier,
+            }]
+        )
+        
       });
     });
   }
@@ -56,10 +93,7 @@ function App() {
       <h1>Is the book better?</h1>
       <Form userInput={userInput} handleSubmit={handleSubmit} setUserInput={setUserInput}/>
 
-      <section className="results">
-        <MovieResults movie={movie} />
-        <BookResults book={book} />
-      </section>
+      <ResultsSection results={results} />
     </div>
   );
 
