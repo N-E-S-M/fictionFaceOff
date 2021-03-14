@@ -87,7 +87,7 @@ function App() {
       console.log(matchedBook[0]);
     } else {
     }
-  }, [bookButtonValue, returnedBooks, returnedMovie])
+  }, [bookButtonValue])
 
 
   const handleSubmit = (e) => {
