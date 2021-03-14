@@ -1,15 +1,15 @@
 function ResultContainer(props) {
-
 	const {
 			type, 
 			name, 
 			description, 
 			rating, 
 			img, 
-			altDescription
+			altDescription,
+			ratingClass
 		} = props;
 		return (
-			<div className={type}>
+			<div className={type, ratingClass}>
 				<h2>{name}</h2>
 				<img src={img} alt={altDescription}/>
 				<p>{description}</p>

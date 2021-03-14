@@ -3,10 +3,15 @@
 @import 'styles/fonts';
 @import 'styles/mixins';
 
+.resultsSection {
+	display: flex;
+}
 
 .movie,
 .book {
 	border: 2px solid green;
+	width: 50%;
+	height: 500px;
 }
 
 .winner {

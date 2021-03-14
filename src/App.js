@@ -71,7 +71,7 @@ function App() {
       // console.log("empty string!!!")
     }
   }, [bookButtonValue])
- 
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -161,8 +161,8 @@ function App() {
         setUserInput('')
         
       })
-     
-  };
+    };
+    // console.log(results)
 
   return (
     <div className="App">
@@ -172,8 +172,18 @@ function App() {
         handleSubmit={handleSubmit}
         setUserInput={setUserInput}
       />
+      
+      {/* {
+        results[0].rating > results[1].rating
+        ? 
+      } */}
 
-      <ResultsSection results={results} />
+      {
+        results[0].name !== '' 
+        ? <ResultsSection results={results} />
+        : null
+      }
+
       {
         searchMultipleBooks.length !== 0 ? (
           <BookChoice
