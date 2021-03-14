@@ -35,6 +35,7 @@ function App() {
 
   const handleBookChoice = (clickedButton) => {
     setBookButtonValue(clickedButton); 
+    setUserInput('')
   }
   // this useEffect will then act once "bookButtonValue" is defined
   useEffect(()=> {
@@ -75,8 +76,6 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchMultipleBooks([]);
-    
-    // prevents white space error
   
 
       axios({
@@ -92,12 +91,12 @@ function App() {
         },
       }).then((response) => {
         const movieObject = response.data.results[0];
-        // console.log(movieObject);
+       
         setReturnedMovie(movieObject);
         // the title that gets sent to the book api
         const title = response.data.results[0].title;
   
-        // console.log(movieObject)
+       
         axios({
           method: "GET",
           url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -108,10 +107,11 @@ function App() {
             Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
           },
         }).then((response) => {
-          // console.log(response.data.items);
+         
           const bookObject = response.data.items[0].volumeInfo;
   
           if (title === bookObject.title) {
+            setUserInput('')
             setResults([
               {
                 type: "movie",
@@ -156,8 +156,12 @@ function App() {
             })
           }
         });
-      });
-    
+      }).catch(() => {
+        alert('No titles found, please search again!')
+        setUserInput('')
+        
+      })
+     
   };
 
   return (
@@ -175,6 +179,7 @@ function App() {
           <BookChoice
             titles={searchMultipleBooks}
             handleBookChoice={handleBookChoice}
+            returnedMovieTitle={returnedMovie.title}
           />
         ) : null
       }
