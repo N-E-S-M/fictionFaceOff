@@ -7,7 +7,7 @@ function ResultContainer(props) {
 			rating, 
 			img, 
 			altDescription,
-			outcome,
+			outcome
 		} = props;
 		return (
 			<div className={type, outcome}>

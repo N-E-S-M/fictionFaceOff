@@ -87,13 +87,12 @@ function App() {
       console.log(matchedBook[0]);
     } else {
     }
-  }, [bookButtonValue])
+  }, [bookButtonValue, returnedBooks, returnedMovie])
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchMultipleBooks([]);
-  
 
       axios({
         method: "GET",
