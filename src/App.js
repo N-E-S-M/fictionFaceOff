@@ -6,6 +6,7 @@ import ResultsSection from "./ResultsSection.js";
 import BookChoice from "./BookChoice.js"
 
 function App() {
+
   const [userInput, setUserInput] = useState("");
   const [results, setResults] = useState([
     {
@@ -41,34 +42,50 @@ function App() {
   useEffect(()=> {
 
     if (bookButtonValue) {
-      console.log('if youre seeing this its working properly, OR you clicked twix')
       const matchedBook = returnedBooks.filter((item) => {
         return item.volumeInfo.title === bookButtonValue;
       })
+      if (matchedBook[0].volumeInfo.averageRating === undefined) {
+            matchedBook[0].volumeInfo.averageRating = 'not rated'
+            matchedBook[0].volumeInfo.outcome = 'winner';
+            returnedMovie.outcome = 'loser';
+          }
+          else if ((returnedMovie.vote_average / 2) > matchedBook[0].volumeInfo.averageRating) {
+            matchedBook[0].volumeInfo.outcome = 'loser';
+            returnedMovie.outcome = 'winner';
+          } else if ((returnedMovie.vote_average / 2) < matchedBook[0].volumeInfo.averageRating) {
+            matchedBook[0].volumeInfo.outcome = 'winner';
+            returnedMovie.outcome = 'loser';
+          } else if ((returnedMovie.vote_average / 2) === matchedBook[0].volumeInfo.averageRating){
+            matchedBook[0].volumeInfo.outcome = 'tie';
+            returnedMovie.outcome = 'tie';
+          }
       setResults([
         {
           type: "movie",
           name: returnedMovie.title,
           description: returnedMovie.overview,
-          rating: Math.round(returnedMovie.vote_average / 2),
+          rating: `${returnedMovie.vote_average / 2}/5`,
           img: `https://image.tmdb.org/t/p/w200${returnedMovie.poster_path}`,
           altDescription: `${returnedMovie.title} poster`,
           id: returnedMovie.id,
+          outcome: returnedMovie.outcome,
         },
   
         {
           type: "book",
           name: matchedBook[0].volumeInfo.title,
+          author: matchedBook[0].volumeInfo.authors[0],
           description: matchedBook[0].volumeInfo.description,
-          rating: matchedBook[0].volumeInfo.averageRating,
+          rating: `${matchedBook[0].volumeInfo.averageRating}/5`,
           img: matchedBook[0].volumeInfo.imageLinks.thumbnail,
           altDescription: `${matchedBook[0].volumeInfo.title} cover`,
           id: matchedBook[0].volumeInfo.industryIdentifiers[0].identifier,
+          outcome: matchedBook[0].volumeInfo.outcome,
         },
       ]);
-      
+      console.log(matchedBook[0]);
     } else {
-      // console.log("empty string!!!")
     }
   }, [bookButtonValue])
 
@@ -91,12 +108,12 @@ function App() {
         },
       }).then((response) => {
         const movieObject = response.data.results[0];
-       
+      
         setReturnedMovie(movieObject);
         // the title that gets sent to the book api
         const title = response.data.results[0].title;
   
-       
+      
         axios({
           method: "GET",
           url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -105,32 +122,53 @@ function App() {
             format: "JSON",
             q: title,
             Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
+            printType: 'books',
           },
         }).then((response) => {
-         
+      
           const bookObject = response.data.items[0].volumeInfo;
   
           if (title === bookObject.title) {
+
+            if (bookObject.averageRating === undefined) {
+              bookObject.averageRating = 'not rated'
+              bookObject.outcome = 'winner';
+              movieObject.outcome = 'loser';
+            }
+            else if ((movieObject.vote_average / 2) > bookObject.averageRating) {
+              bookObject.outcome = 'loser';
+              movieObject.outcome = 'winner';
+            } else if ((movieObject.vote_average / 2) < bookObject.averageRating) {
+              bookObject.outcome = 'winner';
+              movieObject.outcome = 'loser';
+            } else if ((movieObject.vote_average / 2) === bookObject.averageRating){
+              bookObject.outcome = 'tie';
+              movieObject.outcome = 'tie';
+            }
+
             setUserInput('')
             setResults([
               {
                 type: "movie",
                 name: movieObject.title,
                 description: movieObject.overview,
-                rating: Math.round(movieObject.vote_average / 2),
+                rating: `${movieObject.vote_average / 2}/5`,
                 img: `https://image.tmdb.org/t/p/w200${movieObject.poster_path}`,
                 altDescription: `${movieObject.title} poster`,
                 id: movieObject.id,
+                outcome: movieObject.outcome,
               },
   
               {
                 type: "book",
                 name: bookObject.title,
+                author: bookObject.authors[0],
                 description: bookObject.description,
-                rating: bookObject.averageRating,
+                rating: `${bookObject.averageRating}/5`,
                 img: bookObject.imageLinks.thumbnail,
                 altDescription: `${bookObject.title} cover`,
                 id: bookObject.industryIdentifiers[0].identifier,
+                outcome: bookObject.outcome,
               },
             ]);
           } else if (title !== bookObject.title) {
@@ -142,6 +180,7 @@ function App() {
                 format: "JSON",
                 q: title,
                 Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
+                printType: 'books',
               },
             }).then(response => {
               const size = 5;
@@ -172,11 +211,6 @@ function App() {
         handleSubmit={handleSubmit}
         setUserInput={setUserInput}
       />
-      
-      {/* {
-        results[0].rating > results[1].rating
-        ? 
-      } */}
 
       {
         results[0].name !== '' 
