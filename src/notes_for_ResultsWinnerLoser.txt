@@ -1,0 +1,13 @@
+winner / loser / tie
+
+if movie.rating > book.rating = movie wins ---> add "class" of winner to the movie div
+if book.rating < movie.rating = book wins -----> add "class" of loser to book div
+if book.rating === movie.rating = tie -----> display some other thing on the page
+if book.rating === null/0/undefined = book wins -----> display some other thing on the page
+
+styles on a winner class and a loser 
+if its a tie, then add "tie" class to both divs 
+
+and also have banner on page for any result
+
+

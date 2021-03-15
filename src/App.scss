@@ -3,4 +3,62 @@
 @import 'styles/fonts';
 @import 'styles/mixins';
 
+.resultsSection {
+	display: flex;
+}
+
+.movie,
+.book {
+	border: 2px solid green;
+	width: 50%;
+	height: 500px;
+}
+
+.winner {
+	border: 2px solid gold;
+}
+
+.loser {
+	border: 2px solid red;
+}
+
+.tie {
+	border: 2px solid blue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @import 'styles/mediaQueries';
+
+
