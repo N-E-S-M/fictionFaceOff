@@ -6,6 +6,7 @@ import ResultsSection from "./ResultsSection.js";
 import BookChoice from "./BookChoice.js";
 
 function App() {
+
   const [userInput, setUserInput] = useState("");
   const [results, setResults] = useState([
     {
@@ -36,6 +37,7 @@ function App() {
 
   const handleBookChoice = (clickedButton) => {
     setUserInput("");
+
     let movieOutcome = "";
     if (clickedButton) {
       const matchedBook = returnedBooks.filter((item) => {
@@ -98,6 +100,7 @@ function App() {
     e.preventDefault();
     setSearchMultipleBooks([]);
 
+
     axios({
       method: "GET",
       url: `https://api.themoviedb.org/3/search/movie?`,
@@ -117,6 +120,7 @@ function App() {
         // the title that gets sent to the book api
         const title = response.data.results[0].title;
 
+
         axios({
           method: "GET",
           url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -125,12 +129,15 @@ function App() {
             format: "JSON",
             q: title,
             Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
+
             printType: "books",
           },
         }).then((response) => {
+
           const bookObject = response.data.items[0].volumeInfo;
 
           if (title === bookObject.title) {
+
             if (bookObject.averageRating === undefined) {
               bookObject.averageRating = "not rated";
               bookObject.outcome = "winner";
@@ -156,6 +163,7 @@ function App() {
             }
 
             setUserInput("");
+
             setResults([
               {
                 type: "movie",
@@ -190,6 +198,7 @@ function App() {
                 q: title,
                 Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
                 printType: "books",
+
               },
             }).then((response) => {
               const size = 5;
@@ -202,6 +211,7 @@ function App() {
             });
           }
         });
+
       })
       .catch(() => {
         alert("No titles found, please search again!");
@@ -228,6 +238,7 @@ function App() {
           returnedMovieTitle={returnedMovie.title}
         />
       ) : null}
+
     </div>
   );
 }
