@@ -40,25 +40,26 @@ function App() {
   }
   // this useEffect will then act once "bookButtonValue" is defined
   useEffect(()=> {
-
+    let movieOutcome = '';
     if (bookButtonValue) {
       const matchedBook = returnedBooks.filter((item) => {
         return item.volumeInfo.title === bookButtonValue;
       })
+      
       if (matchedBook[0].volumeInfo.averageRating === undefined) {
             matchedBook[0].volumeInfo.averageRating = 'not rated'
             matchedBook[0].volumeInfo.outcome = 'winner';
-            returnedMovie.outcome = 'loser';
+            movieOutcome = 'loser';
           }
           else if ((returnedMovie.vote_average / 2) > matchedBook[0].volumeInfo.averageRating) {
             matchedBook[0].volumeInfo.outcome = 'loser';
-            returnedMovie.outcome = 'winner';
+            movieOutcome = 'winner';
           } else if ((returnedMovie.vote_average / 2) < matchedBook[0].volumeInfo.averageRating) {
             matchedBook[0].volumeInfo.outcome = 'winner';
-            returnedMovie.outcome = 'loser';
+            movieOutcome = 'loser';
           } else if ((returnedMovie.vote_average / 2) === matchedBook[0].volumeInfo.averageRating){
             matchedBook[0].volumeInfo.outcome = 'tie';
-            returnedMovie.outcome = 'tie';
+            movieOutcome = 'tie';
           }
       setResults([
         {
@@ -69,7 +70,7 @@ function App() {
           img: `https://image.tmdb.org/t/p/w200${returnedMovie.poster_path}`,
           altDescription: `${returnedMovie.title} poster`,
           id: returnedMovie.id,
-          outcome: returnedMovie.outcome,
+          outcome: movieOutcome,
         },
   
         {
