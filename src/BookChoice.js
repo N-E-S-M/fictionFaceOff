@@ -1,29 +1,26 @@
-const BookChoice = ({ titles, handleBookChoice, returnedMovieTitle }) => {
+const BookChoice = ({ bookInfo, handleBookChoice, returnedMovieTitle }) => {
   
   return (
 
     <div className="buttonContainer">
     <p>Your search returned {returnedMovieTitle} please select the matching book</p>
-    {titles.map((bookTitle, index) => {
-    
+    {bookInfo.map((book, index) => {
       return (
           <button
             key={index}
-            value={bookTitle}
-            onClick={(e) => {
-              handleBookChoice(e.target.value);
+            value={book.title}
+            onClick={() => {
+              handleBookChoice(book.title);
             }}
           >
-            {bookTitle}
+            <p>{book.title}</p>
+            <p>{book.authors[0]}</p>
           </button>
       );
     })}
     <p>Not the title you're looking for? Search again with specificity!</p>
     </div>
   ) 
-  
-  
- 
 };
 
 export default BookChoice;

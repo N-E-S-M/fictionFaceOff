@@ -1,7 +1,7 @@
 import "./App.scss";
 import axios from "axios";
 import Form from "./Form.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ResultsSection from "./ResultsSection.js";
 import BookChoice from "./BookChoice.js";
 
@@ -34,6 +34,7 @@ function App() {
   const [searchMultipleBooks, setSearchMultipleBooks] = useState([]);
   const [returnedBooks, setReturnedBooks] = useState([]);
   const [returnedMovie, setReturnedMovie] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleBookChoice = (clickedButton) => {
     setUserInput("");
@@ -67,6 +68,7 @@ function App() {
         matchedBook[0].volumeInfo.outcome = "tie";
         movieOutcome = "tie";
       }
+      
       setResults([
         {
           type: "movie",
@@ -91,16 +93,14 @@ function App() {
           outcome: matchedBook[0].volumeInfo.outcome,
         },
       ]);
-      console.log(matchedBook[0]);
-    } else {
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchMultipleBooks([]);
-
-
+    setIsLoading(true);
+    // First API Call (MovieDB)
     axios({
       method: "GET",
       url: `https://api.themoviedb.org/3/search/movie?`,
@@ -120,7 +120,7 @@ function App() {
         // the title that gets sent to the book api
         const title = response.data.results[0].title;
 
-
+        // Second API Call (Google Books)
         axios({
           method: "GET",
           url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -129,15 +129,13 @@ function App() {
             format: "JSON",
             q: title,
             Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
-
             printType: "books",
           },
         }).then((response) => {
-
           const bookObject = response.data.items[0].volumeInfo;
 
           if (title === bookObject.title) {
-
+            setIsLoading(false);
             if (bookObject.averageRating === undefined) {
               bookObject.averageRating = "not rated";
               bookObject.outcome = "winner";
@@ -189,6 +187,7 @@ function App() {
               },
             ]);
           } else if (title !== bookObject.title) {
+            setIsLoading(false);
             axios({
               method: "GET",
               url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -204,7 +203,7 @@ function App() {
               const size = 5;
               const multipleBooks = response.data.items;
               const newBooksArray = multipleBooks.slice(0, size).map((book) => {
-                return book.volumeInfo.title;
+                return book.volumeInfo;
               });
               setSearchMultipleBooks(newBooksArray);
               setReturnedBooks(multipleBooks);
@@ -218,7 +217,6 @@ function App() {
         setUserInput("");
       });
   };
-  // console.log(results)
 
   return (
     <div className="App">
@@ -229,16 +227,28 @@ function App() {
         setUserInput={setUserInput}
       />
 
-      {results[0].name !== "" ? <ResultsSection results={results} /> : null}
+      {
+        isLoading
+          ? <h2>Loading</h2>
+          :
+          <>
+            {
+              results[0].name !== ""
+                ? <ResultsSection results={results} />
+                : null
+            }
+          </>
+      }
 
-      {searchMultipleBooks.length !== 0 ? (
-        <BookChoice
-          titles={searchMultipleBooks}
-          handleBookChoice={handleBookChoice}
-          returnedMovieTitle={returnedMovie.title}
-        />
-      ) : null}
-
+      {
+        searchMultipleBooks.length !== 0
+          ? <BookChoice
+            bookInfo={searchMultipleBooks}
+            handleBookChoice={handleBookChoice}
+            returnedMovieTitle={returnedMovie.title}
+          />
+          : null
+      }
     </div>
   );
 }
