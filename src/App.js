@@ -235,7 +235,7 @@ function App() {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper flexContainer">
 
       <header>
         <h1>Movie <span>vs</span> Book</h1>

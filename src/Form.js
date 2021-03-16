@@ -1,8 +1,9 @@
 const Form = ({ userInput, handleSubmit, setUserInput }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="search">Enter a title:</label>
+      <label htmlFor="search" className="srOnly">Enter a title:</label>
       <input
+        placeholder='Search a Title'
         minLength="2"
         required
         value={userInput}
