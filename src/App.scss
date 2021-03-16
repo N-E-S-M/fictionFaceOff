@@ -1,6 +1,6 @@
-@import 'styles/variables';
-@import 'styles/setup';
-@import 'styles/mixins';
+@import "styles/variables";
+@import "styles/setup";
+@import "styles/mixins";
 
 .wrapper {
 	width: 85%;
@@ -12,12 +12,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-
 	height: 100vh;
 }
 
 header {
-
 	h1 {
 		@include headerFont(8rem);
 	}
@@ -32,24 +30,69 @@ main {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	
 }
 
 .resultsSection {
 	display: flex;
 	justify-content: space-between;
+	align-items: flex-start;
 
-	div {
-		width: 40%;
+	div.winner,
+	div.loser {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		width: 45%;
 		min-width: 400px;
-		
+		padding: 20px;
+		height: 80%;
+
+		h2 {
+			font-size: 2.5rem;
+			text-align: center;
+		}
 	}
+
+	p {
+		font-size: 1.6rem;
+	}
+
+	p.author {
+		padding: 5px;
+		display: none;
+	}
+
+	img {
+		width: 250px;
+		height: 380px;
+		object-fit: cover;
+		margin: 20px;
+	}
+}
+
+.description {
+	height: 300px;
+	overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.description::-webkit-scrollbar {
+	display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.description {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.rating {
 }
 
 form {
 	display: flex;
 	justify-content: center;
-	input[type='text'] {
+	input[type="text"] {
 		font-size: 2rem;
 		padding: 10px;
 		height: 45px;
@@ -63,7 +106,6 @@ form {
 		padding: 10px 40px;
 		height: 45px;
 	}
-
 }
 
 .winner {
@@ -78,41 +120,17 @@ form {
 	border: 2px solid blue;
 }
 
-
 footer {
 	margin-top: auto;
+	padding: 20px;
+	height: 50px;
+	width: 100%;
+	text-align: center;
+
+	a {
+		text-decoration: none;
+		color: $text;
+	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@import 'styles/mediaQueries';
-
-
+@import "styles/mediaQueries";

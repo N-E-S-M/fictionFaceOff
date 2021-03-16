@@ -12,7 +12,7 @@ function ResultContainer(props) {
 			<div className={outcome}>
 				<h2 className="mediaTitle">{name}</h2>
 				<p className="author">{author}</p>
-				<img className="image" src={img} alt={altDescription}/>
+				<div className="imageContainer"><img className="image" src={img} alt={altDescription}/></div>
 				<p className="description">{description}</p>
 				<p className="rating">{rating}</p>
 			</div>

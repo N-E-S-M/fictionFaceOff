@@ -235,6 +235,7 @@ function App() {
   };
 
   return (
+    
     <div className="wrapper flexContainer">
 
       <header>
@@ -275,6 +276,7 @@ function App() {
         <p>created at <a href="https://junocollege.com/">Juno College</a> by nesm</p>
       </footer>
     </div>
+      
   );
 }
 
