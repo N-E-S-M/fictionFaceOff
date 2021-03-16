@@ -6,7 +6,7 @@ import ResultsSection from "./ResultsSection.js";
 import BookChoice from "./BookChoice.js";
 
 function App() {
-
+  // App state
   const [userInput, setUserInput] = useState("");
   const [results, setResults] = useState([
     {
@@ -35,10 +35,14 @@ function App() {
   const [returnedBooks, setReturnedBooks] = useState([]);
   const [returnedMovie, setReturnedMovie] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  // Modal state
+  const [open, setOpen] = useState(false);
+  // const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
 
   const handleBookChoice = (clickedButton) => {
     setUserInput("");
-
+    onCloseModal();
     let movieOutcome = "";
     if (clickedButton) {
       const matchedBook = returnedBooks.filter((item) => {
@@ -68,7 +72,7 @@ function App() {
         matchedBook[0].volumeInfo.outcome = "tie";
         movieOutcome = "tie";
       }
-      
+
       setResults([
         {
           type: "movie",
@@ -117,7 +121,7 @@ function App() {
         const movieObject = response.data.results[0];
 
         setReturnedMovie(movieObject);
-        // the title that gets sent to the book api
+        // The title that gets sent to the book api
         const title = response.data.results[0].title;
 
         // Second API Call (Google Books)
@@ -207,6 +211,7 @@ function App() {
               });
               setSearchMultipleBooks(newBooksArray);
               setReturnedBooks(multipleBooks);
+              setOpen(true);
             });
           }
         });
@@ -229,7 +234,7 @@ function App() {
 
       {
         isLoading
-          ? <h2>Loading</h2>
+          ? <h2>Loading - get ready for some RESULTS</h2>
           :
           <>
             {
@@ -239,13 +244,14 @@ function App() {
             }
           </>
       }
-
       {
         searchMultipleBooks.length !== 0
           ? <BookChoice
             bookInfo={searchMultipleBooks}
             handleBookChoice={handleBookChoice}
             returnedMovieTitle={returnedMovie.title}
+            onCloseModal={onCloseModal}
+            open={open}
           />
           : null
       }
