@@ -17,7 +17,7 @@ const BookChoice = ({ bookInfo, handleBookChoice, returnedMovieTitle, open, onCl
             }
             >
               <p>{book.title}</p>
-              <p>{book.authors[0]}</p>
+              <p>{book.authors[0] || 'No author'}</p>
             </button>
           );
         })}
