@@ -37,17 +37,23 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   // Modal state
   const [open, setOpen] = useState(false);
-  // const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
   const handleBookChoice = (clickedButton) => {
     setUserInput("");
     onCloseModal();
+
     let movieOutcome = "";
+    
     if (clickedButton) {
       const matchedBook = returnedBooks.filter((item) => {
         return item.volumeInfo.title === clickedButton;
       });
+
+      if (matchedBook[0].volumeInfo.authors === undefined || matchedBook[0].volumeInfo.authors[0] === undefined){
+        matchedBook[0].volumeInfo.authors = []
+        matchedBook[0].volumeInfo.authors[0] = 'No Author'
+      } 
 
       if (matchedBook[0].volumeInfo.averageRating === undefined) {
         matchedBook[0].volumeInfo.averageRating = "not rated";
@@ -72,7 +78,7 @@ function App() {
         matchedBook[0].volumeInfo.outcome = "tie";
         movieOutcome = "tie";
       }
-
+      
       setResults([
         {
           type: "movie",
@@ -137,6 +143,11 @@ function App() {
           },
         }).then((response) => {
           const bookObject = response.data.items[0].volumeInfo;
+
+          if (bookObject.authors === undefined || bookObject.authors[0] === undefined){
+            bookObject.authors[0] = []
+            bookObject.authors[0] = 'No Author'
+          } 
 
           if (title === bookObject.title) {
             setIsLoading(false);

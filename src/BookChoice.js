@@ -17,7 +17,11 @@ const BookChoice = ({ bookInfo, handleBookChoice, returnedMovieTitle, open, onCl
             }
             >
               <p>{book.title}</p>
-              <p>{book.authors[0] || 'No author'}</p>
+            {
+            book.authors !== undefined
+              ? <p>{book.authors[0]}</p>
+              : <p>No Author</p>
+            }
             </button>
           );
         })}
