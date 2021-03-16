@@ -44,16 +44,16 @@ function App() {
     onCloseModal();
 
     let movieOutcome = "";
-    
+
     if (clickedButton) {
       const matchedBook = returnedBooks.filter((item) => {
         return item.volumeInfo.title === clickedButton;
       });
 
-      if (matchedBook[0].volumeInfo.authors === undefined || matchedBook[0].volumeInfo.authors[0] === undefined){
+      if (matchedBook[0].volumeInfo.authors === undefined || matchedBook[0].volumeInfo.authors[0] === undefined) {
         matchedBook[0].volumeInfo.authors = []
         matchedBook[0].volumeInfo.authors[0] = 'No Author'
-      } 
+      }
 
       if (matchedBook[0].volumeInfo.averageRating === undefined) {
         matchedBook[0].volumeInfo.averageRating = "not rated";
@@ -78,7 +78,7 @@ function App() {
         matchedBook[0].volumeInfo.outcome = "tie";
         movieOutcome = "tie";
       }
-      
+
       setResults([
         {
           type: "movie",
@@ -144,10 +144,10 @@ function App() {
         }).then((response) => {
           const bookObject = response.data.items[0].volumeInfo;
 
-          if (bookObject.authors === undefined || bookObject.authors[0] === undefined){
+          if (bookObject.authors === undefined || bookObject.authors[0] === undefined) {
             bookObject.authors[0] = []
             bookObject.authors[0] = 'No Author'
-          } 
+          }
 
           if (title === bookObject.title) {
             setIsLoading(false);
@@ -235,37 +235,45 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Is the book better?</h1>
-      <Form
-        userInput={userInput}
-        handleSubmit={handleSubmit}
-        setUserInput={setUserInput}
-      />
+    <div className="wrapper">
 
-      {
-        isLoading
-          ? <h2>Loading - get ready for some RESULTS</h2>
-          :
-          <>
-            {
-              results[0].name !== ""
-                ? <ResultsSection results={results} />
-                : null
-            }
-          </>
-      }
-      {
-        searchMultipleBooks.length !== 0
-          ? <BookChoice
-            bookInfo={searchMultipleBooks}
-            handleBookChoice={handleBookChoice}
-            returnedMovieTitle={returnedMovie.title}
-            onCloseModal={onCloseModal}
-            open={open}
-          />
-          : null
-      }
+      <header>
+        <h1>Movie <span>vs</span> Book</h1>
+      </header>
+      <main>
+        <Form
+          userInput={userInput}
+          handleSubmit={handleSubmit}
+          setUserInput={setUserInput}
+        />
+
+        {
+          isLoading
+            ? <h2>Loading - get ready for some RESULTS</h2>
+            :
+            <>
+              {
+                results[0].name !== ""
+                  ? <ResultsSection results={results} />
+                  : null
+              }
+            </>
+        }
+        {
+          searchMultipleBooks.length !== 0
+            ? <BookChoice
+              bookInfo={searchMultipleBooks}
+              handleBookChoice={handleBookChoice}
+              returnedMovieTitle={returnedMovie.title}
+              onCloseModal={onCloseModal}
+              open={open}
+            />
+            : null
+        }
+      </main>
+      <footer>
+        <p>created at <a href="https://junocollege.com/">Juno College</a> by nesm</p>
+      </footer>
     </div>
   );
 }

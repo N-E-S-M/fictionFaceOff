@@ -10,11 +10,11 @@ function ResultContainer(props) {
 		} = props;
 		return (
 			<div className={outcome}>
-				<h2>{name}</h2>
-				<p>{author}</p>
-				<img src={img} alt={altDescription}/>
-				<p>{description}</p>
-				<p>{rating}</p>
+				<h2 className="mediaTitle">{name}</h2>
+				<p className="author">{author}</p>
+				<img className="image" src={img} alt={altDescription}/>
+				<p className="description">{description}</p>
+				<p className="rating">{rating}</p>
 			</div>
 		)
 }
