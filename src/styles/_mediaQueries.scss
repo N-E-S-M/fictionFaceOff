@@ -1,0 +1,19 @@
+@media (max-width: 475px) {
+    form {
+        flex-direction: column;
+        min-width: 100%;
+        margin: 0 auto;
+
+        input[type="text"] {
+            width: 100%;
+        }
+
+        button {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+}
+
+
+

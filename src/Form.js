@@ -3,7 +3,7 @@ const Form = ({ userInput, handleSubmit, setUserInput }) => {
     <form onSubmit={handleSubmit}>
       <label htmlFor="search" className="srOnly">Enter a title:</label>
       <input
-        placeholder='Search a Title'
+        placeholder='Enter a Title'
         minLength="2"
         required
         value={userInput}
@@ -11,7 +11,7 @@ const Form = ({ userInput, handleSubmit, setUserInput }) => {
         id="search"
         onChange={(e) => { setUserInput(e.target.value) }}
       />
-      <button>Submit</button>
+      <button>search</button>
     </form>
   )
 }
