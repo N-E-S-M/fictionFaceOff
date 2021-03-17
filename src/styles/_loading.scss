@@ -1,0 +1,94 @@
+
+	.loadingContainer {
+		margin-top: 15px;
+		width: 100%;
+		height: auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.loadText {
+		animation: loadText .6s infinite alternate ease;
+	}
+
+	.loader {
+		@include headerFont(2.5rem);
+		display: flex;
+		align-items: center;
+		color: $text;
+
+	}
+
+	.circle {
+		background:$blue;
+		height: 40px;
+		width: 40px;
+		border-radius: 50%;
+		animation: largeCircle 3s infinite linear;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 5px;
+
+	}
+
+	.innerCircle {
+		width: 10px;
+		height: 10px;
+		background-color: #5abfad;
+		border-radius: 50%;
+		animation: smallCircle .8s infinite;
+	}
+
+	.innerCircle2{
+		width: 10px;
+		height: 10px;
+		background-color: #ffd900;
+		border-radius: 50%;
+		animation: mediumCircle .8s infinite;
+	}
+
+	@keyframes largeCircle {
+		0% {
+			transform: rotate(0)
+		}
+	
+		100% {
+			transform: rotate(360deg)
+		}
+	}
+	
+	@keyframes smallCircle {
+		0% {
+			transform: scale(1.1);
+		}
+	
+		50% {
+			transform: scale(.3);
+		}
+
+		100% {transform: scale(1.1);}
+	}
+	
+	@keyframes mediumCircle {
+		0% {
+			transform: scale(.3);
+		}
+	
+		50% {
+			transform: scale(1.1);
+		}
+
+		100% {transform: scale(.3);}
+	}
+
+	@keyframes loadText {
+		from {
+			transform: scale(.95);
+		}
+
+		to {
+			transform: scale(1);
+		}
+	}

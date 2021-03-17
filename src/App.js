@@ -4,6 +4,7 @@ import Form from "./Form.js";
 import { useState } from "react";
 import ResultsSection from "./ResultsSection.js";
 import BookChoice from "./BookChoice.js";
+import Loading from "./Loading.js";
 
 function App() {
   // App state
@@ -247,10 +248,10 @@ function App() {
           handleSubmit={handleSubmit}
           setUserInput={setUserInput}
         />
-
+        
         {
           isLoading
-            ? <h2>Loading - get ready for some RESULTS</h2>
+            ? <Loading />
             :
             <>
               {
