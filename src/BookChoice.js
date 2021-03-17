@@ -1,29 +1,34 @@
-const BookChoice = ({ titles, handleBookChoice, returnedMovieTitle }) => {
-  
-  return (
+import { Modal } from "react-responsive-modal";
 
-    <div className="buttonContainer">
-    <p>Your search returned {returnedMovieTitle} please select the matching book</p>
-    {titles.map((bookTitle, index) => {
-    
-      return (
-          <button
-            key={index}
-            value={bookTitle}
-            onClick={(e) => {
-              handleBookChoice(e.target.value);
-            }}
-          >
-            {bookTitle}
-          </button>
-      );
-    })}
-    <p>Not the title you're looking for? Search again with specificity!</p>
-    </div>
-  ) 
-  
-  
- 
+const BookChoice = ({ bookInfo, handleBookChoice, returnedMovieTitle, open, onCloseModal }) => {
+
+  return (
+    <Modal open={open} onClose={onCloseModal} center>
+      <div className="buttonContainer">
+        <p>Your search returned {returnedMovieTitle} please select the matching book</p>
+        {bookInfo.map((book, index) => {
+          return (
+            <button
+              key={index}
+              value={book.title}
+              onClick={() => {
+                handleBookChoice(book.title);
+              }
+            }
+            >
+              <p>{book.title}</p>
+            {
+            book.authors !== undefined
+              ? <p>{book.authors[0]}</p>
+              : <p>No Author</p>
+            }
+            </button>
+          );
+        })}
+        <p>Not the title you're looking for? Search again with specificity!</p>
+      </div>
+    </Modal>
+  )
 };
 
 export default BookChoice;

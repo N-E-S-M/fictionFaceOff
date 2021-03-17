@@ -1,12 +1,12 @@
 import "./App.scss";
 import axios from "axios";
 import Form from "./Form.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ResultsSection from "./ResultsSection.js";
-import BookChoice from "./BookChoice.js"
+import BookChoice from "./BookChoice.js";
 
 function App() {
-
+  // App state
   const [userInput, setUserInput] = useState("");
   const [results, setResults] = useState([
     {
@@ -17,6 +17,7 @@ function App() {
       img: "",
       altDescription: "",
       id: "1",
+      outcome: "",
     },
 
     {
@@ -27,40 +28,59 @@ function App() {
       img: "",
       altDescription: "",
       id: "2",
+      outcome: "",
     },
   ]);
   const [searchMultipleBooks, setSearchMultipleBooks] = useState([]);
-  const [bookButtonValue, setBookButtonValue] = useState('');
   const [returnedBooks, setReturnedBooks] = useState([]);
   const [returnedMovie, setReturnedMovie] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  // Modal state
+  const [open, setOpen] = useState(false);
+  const onCloseModal = () => setOpen(false);
 
   const handleBookChoice = (clickedButton) => {
-    setBookButtonValue(clickedButton); 
-    setUserInput('')
-  }
-  // this useEffect will then act once "bookButtonValue" is defined
+    
+    setUserInput("");
+    onCloseModal();
 
-  useEffect(()=> {
+    let movieOutcome = "";
 
-    if (bookButtonValue) {
+
+    if (clickedButton) {
       const matchedBook = returnedBooks.filter((item) => {
-        return item.volumeInfo.title === bookButtonValue;
-      })
+        return item.volumeInfo.title === clickedButton;
+      });
+
+      if (matchedBook[0].volumeInfo.authors === undefined || matchedBook[0].volumeInfo.authors[0] === undefined) {
+        matchedBook[0].volumeInfo.authors = []
+        matchedBook[0].volumeInfo.authors[0] = 'No Author'
+      }
+
       if (matchedBook[0].volumeInfo.averageRating === undefined) {
-            matchedBook[0].volumeInfo.averageRating = 'not rated'
-            matchedBook[0].volumeInfo.outcome = 'winner';
-            returnedMovie.outcome = 'loser';
-          }
-          else if ((returnedMovie.vote_average / 2) > matchedBook[0].volumeInfo.averageRating) {
-            matchedBook[0].volumeInfo.outcome = 'loser';
-            returnedMovie.outcome = 'winner';
-          } else if ((returnedMovie.vote_average / 2) < matchedBook[0].volumeInfo.averageRating) {
-            matchedBook[0].volumeInfo.outcome = 'winner';
-            returnedMovie.outcome = 'loser';
-          } else if ((returnedMovie.vote_average / 2) === matchedBook[0].volumeInfo.averageRating){
-            matchedBook[0].volumeInfo.outcome = 'tie';
-            returnedMovie.outcome = 'tie';
-          }
+        matchedBook[0].volumeInfo.averageRating = "not rated";
+        matchedBook[0].volumeInfo.outcome = "winner";
+        movieOutcome = "loser";
+      } else if (
+        returnedMovie.vote_average / 2 >
+        matchedBook[0].volumeInfo.averageRating
+      ) {
+        matchedBook[0].volumeInfo.outcome = "loser";
+        movieOutcome = "winner";
+      } else if (
+        returnedMovie.vote_average / 2 <
+        matchedBook[0].volumeInfo.averageRating
+      ) {
+        matchedBook[0].volumeInfo.outcome = "winner";
+        movieOutcome = "loser";
+      } else if (
+        returnedMovie.vote_average / 2 ===
+        matchedBook[0].volumeInfo.averageRating
+      ) {
+        matchedBook[0].volumeInfo.outcome = "tie";
+        movieOutcome = "tie";
+      }
+
       setResults([
         {
           type: "movie",
@@ -70,9 +90,9 @@ function App() {
           img: `https://image.tmdb.org/t/p/w200${returnedMovie.poster_path}`,
           altDescription: `${returnedMovie.title} poster`,
           id: returnedMovie.id,
-          outcome: returnedMovie.outcome,
+          outcome: movieOutcome,
         },
-  
+
         {
           type: "book",
           name: matchedBook[0].volumeInfo.title,
@@ -85,36 +105,35 @@ function App() {
           outcome: matchedBook[0].volumeInfo.outcome,
         },
       ]);
-      console.log(matchedBook[0]);
-    } else {
     }
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookButtonValue])
+  };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchMultipleBooks([]);
-
-      axios({
-        method: "GET",
-        url: `https://api.themoviedb.org/3/search/movie?`,
-        dataResponse: "JSON",
-        params: {
-          format: "JSON",
-          query: userInput,
-          api_key: "6f113bf7cccb0c0c911600f2963a2df4",
-          include_adult: false,
-          language: "en-US",
-        },
-      }).then((response) => {
+    setIsLoading(true);
+    // First API Call (MovieDB)
+    axios({
+      method: "GET",
+      url: `https://api.themoviedb.org/3/search/movie?`,
+      dataResponse: "JSON",
+      params: {
+        format: "JSON",
+        query: userInput,
+        api_key: "6f113bf7cccb0c0c911600f2963a2df4",
+        include_adult: false,
+        language: "en-US",
+      },
+    })
+      .then((response) => {
         const movieObject = response.data.results[0];
-      
+        console.log(movieObject);
         setReturnedMovie(movieObject);
-        // the title that gets sent to the book api
+        // The title that gets sent to the book api
         const title = response.data.results[0].title;
-  
-      
+
+        // Second API Call (Google Books)
         axios({
           method: "GET",
           url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -123,31 +142,44 @@ function App() {
             format: "JSON",
             q: title,
             Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
-            printType: 'books',
+            printType: "books",
           },
         }).then((response) => {
-      
           const bookObject = response.data.items[0].volumeInfo;
-  
+          console.log(bookObject);
+          if (bookObject.authors === undefined || bookObject.authors[0] === undefined) {
+            bookObject.authors[0] = []
+            bookObject.authors[0] = 'No Author'
+          }
+
           if (title === bookObject.title) {
-
+            setIsLoading(false);
             if (bookObject.averageRating === undefined) {
-              bookObject.averageRating = 'not rated'
-              bookObject.outcome = 'winner';
-              movieObject.outcome = 'loser';
-            }
-            else if ((movieObject.vote_average / 2) > bookObject.averageRating) {
-              bookObject.outcome = 'loser';
-              movieObject.outcome = 'winner';
-            } else if ((movieObject.vote_average / 2) < bookObject.averageRating) {
-              bookObject.outcome = 'winner';
-              movieObject.outcome = 'loser';
-            } else if ((movieObject.vote_average / 2) === bookObject.averageRating){
-              bookObject.outcome = 'tie';
-              movieObject.outcome = 'tie';
+              bookObject.averageRating = "not rated";
+              bookObject.outcome = "winner";
+              movieObject.outcome = "loser";
+            } else if (
+              movieObject.vote_average / 2 >
+              bookObject.averageRating
+            ) {
+              bookObject.outcome = "loser";
+              movieObject.outcome = "winner";
+            } else if (
+              movieObject.vote_average / 2 <
+              bookObject.averageRating
+            ) {
+              bookObject.outcome = "winner";
+              movieObject.outcome = "loser";
+            } else if (
+              movieObject.vote_average / 2 ===
+              bookObject.averageRating
+            ) {
+              bookObject.outcome = "tie";
+              movieObject.outcome = "tie";
             }
 
-            setUserInput('')
+            setUserInput("");
+
             setResults([
               {
                 type: "movie",
@@ -159,7 +191,7 @@ function App() {
                 id: movieObject.id,
                 outcome: movieObject.outcome,
               },
-  
+
               {
                 type: "book",
                 name: bookObject.title,
@@ -173,6 +205,7 @@ function App() {
               },
             ]);
           } else if (title !== bookObject.title) {
+            setIsLoading(false);
             axios({
               method: "GET",
               url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -181,54 +214,72 @@ function App() {
                 format: "JSON",
                 q: title,
                 Key: "AIzaSyDDrPYFlXLLrSfJCd7qoXhe1GqUiPj5PQg",
-                printType: 'books',
+                printType: "books",
+
               },
-            }).then(response => {
+            }).then((response) => {
               const size = 5;
               const multipleBooks = response.data.items;
               const newBooksArray = multipleBooks.slice(0, size).map((book) => {
-                return (
-                  book.volumeInfo.title
-                )
-              })
+                return book.volumeInfo;
+              });
               setSearchMultipleBooks(newBooksArray);
               setReturnedBooks(multipleBooks);
-            })
+              setOpen(true);
+            });
           }
         });
-      }).catch(() => {
-        alert('No titles found, please search again!')
-        setUserInput('')
-        
+
       })
-    };
-    // console.log(results)
+      .catch(() => {
+        alert("No titles found, please search again!");
+        setUserInput("");
+      });
+  };
 
   return (
-    <div className="App">
-      <h1>Is the book better?</h1>
-      <Form
-        userInput={userInput}
-        handleSubmit={handleSubmit}
-        setUserInput={setUserInput}
-      />
+    
+    <div className="wrapper flexContainer">
 
-      {
-        results[0].name !== '' 
-        ? <ResultsSection results={results} />
-        : null
-      }
+      <header>
+        <h1>Movie <span>vs</span> Book</h1>
+      </header>
+      <main>
+        <Form
+          userInput={userInput}
+          handleSubmit={handleSubmit}
+          setUserInput={setUserInput}
+        />
 
-      {
-        searchMultipleBooks.length !== 0 ? (
-          <BookChoice
-            titles={searchMultipleBooks}
-            handleBookChoice={handleBookChoice}
-            returnedMovieTitle={returnedMovie.title}
-          />
-        ) : null
-      }
+        {
+          isLoading
+            ? <h2>Loading - get ready for some RESULTS</h2>
+            :
+            <>
+              {
+                results[0].name !== ""
+                  ? <ResultsSection results={results} />
+                  : null
+              }
+            </>
+        }
+        {
+          searchMultipleBooks.length !== 0
+            ? <BookChoice
+              bookInfo={searchMultipleBooks}
+              handleBookChoice={handleBookChoice}
+              returnedMovieTitle={returnedMovie.title}
+              onCloseModal={onCloseModal}
+              open={open}
+            />
+            : null
+        }
+      </main>
+      <footer>
+        <p>created at <a href="https://junocollege.com/">Juno College</a> by nesm</p>
+      </footer>
     </div>
+      
   );
 }
 

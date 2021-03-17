@@ -1,0 +1,14 @@
+// font mixins
+
+@mixin headerFont($fontSize) {
+	font-family: $header;
+	color: $text;
+	font-size: $fontSize;
+}
+
+@mixin bodyText($fontSize) {
+	font-family: $bodyText;
+	color: $text;
+	font-size: $fontSize;
+}
+

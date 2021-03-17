@@ -1,5 +1,10 @@
+import ReactCardFlip from 'react-card-flip';
+import { useState } from "react";
+
 function ResultContainer(props) {
-	const { 
+
+	const {
+
 			name, 
 			author,
 			description, 
@@ -8,14 +13,31 @@ function ResultContainer(props) {
 			altDescription,
 			outcome
 		} = props;
+
+	const [isFlipped, setIsFlipped] = useState(false);
+
+	function handleCardClick(e) {
+		e.preventDefault();
+		setIsFlipped(!isFlipped);
+	}
+
 		return (
-			<div className={outcome}>
-				<h2>{name}</h2>
-				<p>{author}</p>
-				<img src={img} alt={altDescription}/>
-				<p>{description}</p>
-				<p>{rating}</p>
-			</div>
+
+			<ReactCardFlip isFlipped={isFlipped} flipDirection="vertical"> 
+					<div className={outcome}>
+						<h2 className="mediaTitle">{name}</h2>
+						<p className="author">{author}</p>
+						<div className="imageContainer"><img className="image" src={img} alt={altDescription}/></div>
+						<button onClick={handleCardClick}>Description</button>
+						<p className="rating">{rating}</p>
+					</div>
+
+					<div className="back">
+						<h2 className="mediaTitle">{name}</h2>
+						<p>{description}</p>
+						<button onClick={handleCardClick}>Go back</button>
+					</div>
+			</ReactCardFlip>
 		)
 }
 

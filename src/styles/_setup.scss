@@ -6,9 +6,15 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 .srOnly { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
-html {font-size: 62.5%;}
+html {
+  font-size: 62.5%;
+  background-color: $blue;
+  color: $text;
+  font-family: $bodyText;
+}
 
 body * {
   margin: 0;
   padding: 0;
+
 }

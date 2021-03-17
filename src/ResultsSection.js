@@ -1,6 +1,7 @@
 import ResultContainer from './ResultContainer'
 function ResultsSection({results}) {
-// console.log(results);
+		
+
 
 	return (
 		
