@@ -248,7 +248,7 @@ function App() {
     <div className="wrapper flexContainer">
 
       <header>
-        <h1>Fiction Face-off</h1>
+        <h1>Fiction Face/Off</h1>
         <h2>The debate is heated! Is the book or movie version better?!</h2>
       </header>
       <main>
