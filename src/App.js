@@ -40,10 +40,12 @@ function App() {
   const onCloseModal = () => setOpen(false);
 
   const handleBookChoice = (clickedButton) => {
+    
     setUserInput("");
     onCloseModal();
 
     let movieOutcome = "";
+
 
     if (clickedButton) {
       const matchedBook = returnedBooks.filter((item) => {
@@ -105,6 +107,7 @@ function App() {
       ]);
     }
   };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -2,7 +2,9 @@ import ReactCardFlip from 'react-card-flip';
 import { useState } from "react";
 
 function ResultContainer(props) {
+
 	const {
+
 			name, 
 			author,
 			description, 
@@ -20,6 +22,7 @@ function ResultContainer(props) {
 	}
 
 		return (
+
 			<ReactCardFlip isFlipped={isFlipped} flipDirection="vertical"> 
 					<div className={outcome}>
 						<h2 className="mediaTitle">{name}</h2>
