@@ -20,7 +20,7 @@ function ResultContainer(props) {
 	}
 
 		return (
-			<ReactCardFlip isFlipped={isFlipped} flipDirection="vertical"> 
+			<ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal"> 
 					<div className={outcome}>
 						<h2 className="mediaTitle">{name}</h2>
 						<p className="author">{author}</p>

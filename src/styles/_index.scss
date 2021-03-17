@@ -85,11 +85,11 @@ button {
     justify-content: space-between;
     align-items: flex-start;
     height: 65vh;
-    min-height: 480px;
+    min-height: 500px;
 
     .react-card-flip {
         width: 45%;
-        min-width: 400px;
+        min-width: 450px;
         height: 95%;
         margin: 25px;
     }
@@ -102,6 +102,7 @@ button {
         justify-content: flex-start;
         align-items: center;
         width: 100%;
+        max-width: 450px;
         height: 100%;
         padding: 20px;
         background: $darkerBlue;
