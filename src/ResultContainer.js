@@ -1,5 +1,7 @@
 import ReactCardFlip from 'react-card-flip';
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFilm, faBook } from '@fortawesome/free-solid-svg-icons'
 import StarSVG from './StarSVG';
 
 function ResultContainer(props) {
@@ -21,6 +23,7 @@ function ResultContainer(props) {
 	}
 
 		return (
+      <>
 			<ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal"> 
 					<div className={outcome}>
 						<h2 className="mediaTitle">{name}</h2>
@@ -30,13 +33,17 @@ function ResultContainer(props) {
 						<StarSVG className="star"/>
 							<p className="rating">{rating}</p>
 					</div>
-
 					<div className="back">
 						<h2 className="mediaTitle">{name}</h2>
 						<p>{description}</p>
 						<button onClick={handleCardClick}>Go back</button>
 					</div>
 			</ReactCardFlip>
+      <FontAwesomeIcon icon={faFilm} className="icon filmIcon" aria-hidden="true" title="Film section" />
+      <span className="srOnly">Film section</span>
+      <FontAwesomeIcon icon={faBook} className="icon bookIcon" aria-hidden="true" title="Book section" />
+      <span className="srOnly">Book section</span>
+      </>
 		)
 }
 
