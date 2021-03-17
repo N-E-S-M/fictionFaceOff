@@ -197,6 +197,7 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    position: relative;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -205,11 +206,21 @@ form {
     background: $darkerBlue;
   }
 
+  h3 {
+      position: absolute;
+      top: -25px;
+      font-size: 2.7rem;
+      text-transform: uppercase;
+      font-style: italic;
+      color: $darkerBlue;
+        padding: 0 10px 0 5px;
+  }
+
   h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     text-align: center;
     height: 35px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   p {
@@ -235,6 +246,15 @@ button.readMore {
     background-color: $darkerBlue;
     border: none;
     margin-top: 30px;
+
+    &:hover,
+    &:focus {
+        color: darken($text, 20%);
+    }
+
+    &:focus {
+        outline: 1px solid darken($text, 20%);
+    }
 }
 
 div.back {
@@ -249,9 +269,24 @@ div.back {
     /* Hide scrollbar for IE, Edge and Firefox */
     &:-webkit-scrollbar {
       display: none;
-    }
+    }  
+  }
 
-    
+  button {
+      font-size: 2rem;
+        color: $text;
+        background-color: $darkerBlue;
+        border: none;
+        margin-top: auto;
+
+        &:hover,
+        &:focus {
+            color: darken($text, 20%);
+        }
+
+        &:focus {
+            outline: 1px solid darken($text, 20%);
+        }
   }
 }
 
@@ -266,6 +301,10 @@ p.rating {
 .winner {
     border: 7px solid $yellow;
 
+    h3 {
+        background-color: $yellow;
+    }
+
     .rating {
         color: $winner;
     }
@@ -273,6 +312,9 @@ p.rating {
 
 .loser, .tie {
 	border: 7px solid $text;
+    h3 {
+        background-color: $text;
+    }
 
     .star {
         opacity: 0;

@@ -56,7 +56,7 @@ function App() {
         matchedBook[0].volumeInfo.authors[0] = 'No Author'
       }
 
-      if (matchedBook[0].volumeInfo.imageLinks === undefined || matchedBook[0].volumeInfo.imageLinks.thumbnail) {
+      if (matchedBook[0].volumeInfo.imageLinks === undefined || matchedBook[0].volumeInfo.imageLinks.thumbnail === undefined) {
         matchedBook[0].volumeInfo.imageLinks = {}
         matchedBook[0].volumeInfo.imageLinks.thumbnail = 'No Image'
       }
@@ -153,12 +153,17 @@ function App() {
             bookObject.authors[0] = 'No Author'
           }
 
+          if (bookObject.imageLinks === undefined || bookObject.imageLinks.thumbnail === undefined) {
+          bookObject.imageLinks = {}
+          bookObject.imageLinks.thumbnail = 'No Image'
+          }
+
           if (title === bookObject.title) {
             setIsLoading(false);
             if (bookObject.averageRating === undefined) {
               bookObject.averageRating = "not rated";
-              bookObject.outcome = "winner";
-              movieObject.outcome = "loser";
+              bookObject.outcome = "loser";
+              movieObject.outcome = "winner";
             } else if (
               movieObject.vote_average / 2 >
               bookObject.averageRating

@@ -6,6 +6,7 @@ import StarSVG from './StarSVG';
 
 function ResultContainer(props) {
 	const {
+			type,
 			name, 
 			author,
 			description, 
@@ -26,6 +27,7 @@ function ResultContainer(props) {
       <>
 			<ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal"> 
 					<div className={outcome}>
+						<h3 className={type}>{type}</h3>
 						<h2 className="mediaTitle">{name}</h2>
 						<button className="readMore" onClick={handleCardClick}>Read More</button>
 						<p className="author">{author}</p>
