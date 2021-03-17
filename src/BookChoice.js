@@ -5,7 +5,7 @@ const BookChoice = ({ bookInfo, handleBookChoice, returnedMovieTitle, open, onCl
   return (
     <Modal open={open} onClose={onCloseModal} center>
       <div className="buttonContainer">
-        <p>Your search returned {returnedMovieTitle} please select the matching book</p>
+        <p className="returnSearch">Your search returned "{returnedMovieTitle}". Please select the matching book:</p>
         {bookInfo.map((book, index) => {
           return (
             <button
@@ -25,7 +25,7 @@ const BookChoice = ({ bookInfo, handleBookChoice, returnedMovieTitle, open, onCl
             </button>
           );
         })}
-        <p>Not the title you're looking for? Search again with specificity!</p>
+        <p className="narrowSearch">Not the title you're looking for? Please narrow your search.</p>
       </div>
     </Modal>
   )
