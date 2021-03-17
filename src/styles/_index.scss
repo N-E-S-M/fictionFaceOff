@@ -23,7 +23,7 @@ header {
     span {
         @include headerFont(calc(1rem + 4vw));
     }
-    margin: 15px;
+    margin: 10px;
 }
 
 main {
@@ -84,19 +84,28 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    height: 65vh;
+    min-height: 480px;
+
+    .react-card-flip {
+        width: 45%;
+        min-width: 400px;
+        height: 95%;
+        margin: 25px;
+    }
 
     div.winner,
-    div.loser {
+    div.loser,
+    div.back {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        width: 45%;
-        height: 80%;
-        min-width: 400px;
+        width: 100%;
+        height: 100%;
         padding: 20px;
-        margin: 25px;
         background: $darkerBlue;
+    }
 
     h2 {
         font-size: 2.5rem;
@@ -104,8 +113,7 @@ button {
         height: 35px;
         margin-bottom: 10px;
     }
-    }
-
+    
     p {
         font-size: 1.6rem;
     }
@@ -116,26 +124,40 @@ button {
     }
 
     img {
-        width: 250px;
-        height: 380px;
+        height: calc(14rem + 8vw);
         object-fit: cover;
-        margin: 20px;
+        margin: 30px 0 20px;
+    }
+
+    button {
+        margin-top: auto;
+        padding: 5px;
+        background-color: $blue;
+        font-size: 2rem;
+        color: $text;
+        border: 1px solid transparent;
+
+        &:hover,
+        &:focus {
+            border: 1px solid $lightOrange;
+        }
     }
 }
 
-.description {
-    height: 250px;
-    overflow-y: scroll;
-}
+div.back {
+    p {
+        padding: 30px 20px;
+        overflow-y: scroll;
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.description::-webkit-scrollbar {
-    display: none;
-}
-/* Hide scrollbar for IE, Edge and Firefox */
-.description {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+     /* Hide scrollbar for IE, Edge and Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+        &:-webkit-scrollbar {
+            display: none;
+        }
+    }
 }
 
 p.rating {
@@ -170,3 +192,4 @@ footer {
         }
     }
 }
+
