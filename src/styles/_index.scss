@@ -18,7 +18,16 @@ header {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: lighten($blue, 30%);
     text-shadow: 3px 3px 0px $darkerText;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  h2 {
+      font-family: $bodyText;
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 8px;
+      font-weight: 400;
   }
 
   span {
@@ -159,7 +168,7 @@ form {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  height: 65vh;
+  height: 100%;
   min-height: 500px;
   position: relative;
 
@@ -346,6 +355,7 @@ footer {
   height: 50px;
   width: 100%;
   text-align: center;
+  font-size: 1.6rem;
 
   a {
     text-decoration: none;

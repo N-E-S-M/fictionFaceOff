@@ -1,11 +1,11 @@
 function Loading() {
 	return (
 		<div className="loadingContainer">
-			<div class="loader">
+			<div className="loader">
 				<span className="loadText">Loading</span>
-				<div class="circle">
-					<div class="innerCircle"></div>
-					<div class="innerCircle2"></div>
+				<div className="circle">
+					<div className="innerCircle"></div>
+					<div className="innerCircle2"></div>
 				</div>
 	
 			</div>

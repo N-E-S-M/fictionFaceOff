@@ -3,7 +3,7 @@ const Form = ({ userInput, handleSubmit, setUserInput }) => {
     <form onSubmit={handleSubmit}>
       <label htmlFor="search" className="srOnly">Enter a title:</label>
       <input
-        placeholder='Enter a Title'
+        placeholder='Enter a title to find out...'
         minLength="2"
         required
         value={userInput}

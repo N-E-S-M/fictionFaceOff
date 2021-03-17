@@ -248,7 +248,8 @@ function App() {
     <div className="wrapper flexContainer">
 
       <header>
-        <h1>Movie <span>vs</span> Book</h1>
+        <h1>Fiction Face-off</h1>
+        <h2>The debate is heated! Is the book or movie version better?!</h2>
       </header>
       <main>
         <Form
@@ -282,7 +283,7 @@ function App() {
         }
       </main>
       <footer>
-        <p>created at <a href="https://junocollege.com/">Juno College</a> by nesm</p>
+        <p>Created at <a href="https://junocollege.com/">Juno College</a> by Nathan, Steph, Mitch &amp; Emma</p>
       </footer>
     </div>
 
