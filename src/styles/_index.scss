@@ -18,6 +18,7 @@ header {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: lighten($blue, 30%);
     text-shadow: 3px 3px 0px $darkerText;
+    margin-bottom: 15px;
   }
 
   span {
@@ -28,6 +29,7 @@ header {
 
 main {
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -166,6 +168,9 @@ form {
     min-width: 450px;
     height: 95%;
     margin: 25px;
+    max-height: 600px;
+    min-height: 500px;
+    
   }
 
   .icon {
@@ -195,6 +200,7 @@ form {
     align-items: center;
     width: 100%;
     height: 100%;
+    min-height: 500px;
     padding: 20px;
     background: $darkerBlue;
   }

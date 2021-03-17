@@ -56,10 +56,15 @@ function App() {
         matchedBook[0].volumeInfo.authors[0] = 'No Author'
       }
 
+      if (matchedBook[0].volumeInfo.imageLinks === undefined || matchedBook[0].volumeInfo.imageLinks.thumbnail) {
+        matchedBook[0].volumeInfo.imageLinks = {}
+        matchedBook[0].volumeInfo.imageLinks.thumbnail = 'No Image'
+      }
+
       if (matchedBook[0].volumeInfo.averageRating === undefined) {
         matchedBook[0].volumeInfo.averageRating = "not rated";
-        matchedBook[0].volumeInfo.outcome = "winner";
-        movieOutcome = "loser";
+        matchedBook[0].volumeInfo.outcome = "loser";
+        movieOutcome = "winner";
       } else if (
         returnedMovie.vote_average / 2 >
         matchedBook[0].volumeInfo.averageRating
@@ -234,7 +239,7 @@ function App() {
   };
 
   return (
-    
+
     <div className="wrapper flexContainer">
 
       <header>
@@ -246,7 +251,7 @@ function App() {
           handleSubmit={handleSubmit}
           setUserInput={setUserInput}
         />
-        
+
         {
           isLoading
             ? <Loading />
@@ -275,7 +280,7 @@ function App() {
         <p>created at <a href="https://junocollege.com/">Juno College</a> by nesm</p>
       </footer>
     </div>
-      
+
   );
 }
 
