@@ -1,67 +1,67 @@
 .wrapper {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .flexContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-height: 100vh;
 }
 
 header {
-    h1 {
-        @include headerFont(calc(4rem + 3.5vw));
-        -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: lighten( $blue, 30% );
-        text-shadow: 3px 3px 0px $darkerText;
-    }
+  h1 {
+    @include headerFont(calc(4rem + 3.5vw));
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: lighten($blue, 30%);
+    text-shadow: 3px 3px 0px $darkerText;
+  }
 
-    span {
-        @include headerFont(calc(1rem + 4vw));
-    }
-    margin: 10px;
+  span {
+    @include headerFont(calc(1rem + 4vw));
+  }
+  margin: 10px;
 }
 
 main {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 form {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto 20px auto;
-    width: 50vw;
-    min-width: 450px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  width: 50vw;
+  min-width: 450px;
 
-    input[type="text"] {
-        height: 40px;
-        width: 60%;
-        padding: 10px;
-        margin-bottom: 5px;
-        font-size: 1.9rem;
-        letter-spacing: 0.8px;
-        color: $text;
-        border: 1px solid $lightOrange;
-        outline: none;
-        background-color: $blue;
-        
-        &:focus,
-        &:hover {
-            background-color: lighten( $blue, 10% )
-        }
-}
+  input[type="text"] {
+    height: 40px;
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 5px;
+    font-size: 1.9rem;
+    letter-spacing: 0.8px;
+    color: $text;
+    border: 1px solid $lightOrange;
+    outline: none;
+    background-color: $blue;
 
-::placeholder {
+    &:focus,
+    &:hover {
+      background-color: lighten($blue, 10%);
+    }
+  }
+
+  ::placeholder {
     opacity: 1;
-}
+  }
 
-button {
+  button {
     height: 40px;
     width: 25%;
     min-width: 120px;
@@ -72,93 +72,166 @@ button {
     border: 1px solid transparent;
     background-color: $darkerOrange;
 
-        &:hover,
-        &:focus {
-        background-color: $text;
-        border: 1px solid $darkerOrange;
-        }
+    &:hover,
+    &:focus {
+      background-color: $text;
+      border: 1px solid $darkerOrange;
     }
+  }
 }
 
-.resultsSection {
+// Modal Box
+
+.react-responsive-modal-modal {
+  background: $lightOrange !important;
+  width: 60%;
+  height: 80%;
+  max-width: 850px;
+  min-width: 350px;
+  margin: 20px;
+  padding: 0;
+  overflow-y: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+
+  .buttonContainer {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
-    height: 65vh;
-    
-    .react-card-flip {
-        width: 45%;
-        min-width: 450px;
-        height: 95%;
-        margin: 25px;
-        min-height: 500px;
-    }
+    align-items: center;
+    height: 100%;
+    padding: 20px;
 
-    div.winner,
-    div.loser,
-    div.back {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
-        max-width: 450px;
-        min-height: 500px;
-        height: 100%;
-        padding: 20px;
-        background: $darkerBlue;
-    }
-
-    h2 {
-        font-size: 2.6rem;
-        text-align: center;
-        height: 35px;
-        margin-bottom: 10px;
-    }
-    
     p {
-        font-size: 1.6rem;
-    }
+      font-family: $bodyText;
+      font-size: calc(1.2rem + 1vw);
+      color: $darkerBlue;
+      text-align: center;
+      display: block;
 
-    p.author {
-        padding: 5px;
-        display: none;
-    }
+      &.returnSearch {
+        margin-bottom: 10px;
 
-    img {
-        height: calc(14rem + 8vw);
-        object-fit: cover;
-        margin: 30px 0 20px;
+        span {
+          font-weight: bolder;
+        }
+      }
+
+      &.narrowSearch {
+        font-size: calc(0.8rem + 1vw);
+        margin-top: 25px;
+      }
     }
 
     button {
-        padding: 5px;
-        background-color: $darkerBlue;
-        font-size: 1.9rem;
-        color: $text;
-        border: 1px solid transparent;
+      width: 80%;
+      max-width: 400px;
+      padding: 10px;
+      margin-top: 5px;
+      outline: none;
+      border: none;
+      background: $text;
 
-        &:hover,
-        &:focus {
-            border: 1px solid $lightOrange;
+      &:hover,
+      &:focus {
+        background: darken($text, 20%);
+      }
+
+      p {
+        font-size: 1.8rem;
+      }
+
+      p.buttonTitle {
+          font-size: 2.2rem;
         }
     }
+  }
+}
+
+
+// Results Section
+
+.resultsSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 65vh;
+  min-height: 500px;
+
+  .react-card-flip {
+    width: 45%;
+    min-width: 450px;
+    height: 95%;
+    margin: 25px;
+  }
+
+  div.winner,
+  div.loser,
+  div.back {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    height: 100%;
+    padding: 20px;
+    background: $darkerBlue;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    height: 35px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.6rem;
+  }
+
+  p.author {
+    padding: 5px;
+    display: none;
+  }
+
+  img {
+    height: calc(14rem + 8vw);
+    object-fit: cover;
+    margin: 30px 0 20px;
+  }
+
+  button {
+    margin-top: auto;
+    padding: 5px;
+    background-color: $blue;
+    font-size: 2rem;
+    color: $text;
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus {
+      border: 1px solid $lightOrange;
+    }
+  }
 }
 
 div.back {
-    p {
-        padding: 30px 20px;
-        overflow-y: scroll;
-
-     /* Hide scrollbar for IE, Edge and Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
+  p {
+    padding: 30px 20px;
+    overflow-y: scroll;
 
     /* Hide scrollbar for IE, Edge and Firefox */
-        &:-webkit-scrollbar {
-            display: none;
-        }
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    &:-webkit-scrollbar {
+      display: none;
     }
+  }
 }
 
 p.rating {
@@ -168,7 +241,6 @@ p.rating {
     position: absolute;
     bottom: 35px;
 }
-
 
 .winner {
     border: 7px solid $yellow;
@@ -206,20 +278,19 @@ p.rating {
 
 
 footer {
-    margin-top: auto;
-    padding: 20px;
-    height: 50px;
-    width: 100%;
-    text-align: center;
+  margin-top: auto;
+  padding: 20px;
+  height: 50px;
+  width: 100%;
+  text-align: center;
 
-    a {
-        text-decoration: none;
-        color: $text;
+  a {
+    text-decoration: none;
+    color: $text;
 
-        &:focus,
-        &:hover {
-            color: $lightOrange;
-        }
+    &:focus,
+    &:hover {
+      color: $lightOrange;
     }
+  }
 }
-
