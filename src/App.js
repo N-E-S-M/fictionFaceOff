@@ -1,10 +1,10 @@
-import "./App.scss";
 import axios from "axios";
 import Form from "./Form.js";
 import { useState } from "react";
 import ResultsSection from "./ResultsSection.js";
 import BookChoice from "./BookChoice.js";
 import Loading from "./Loading.js";
+import "./App.scss";
 
 function App() {
   // App state
@@ -126,7 +126,6 @@ function App() {
     })
       .then((response) => {
         const movieObject = response.data.results[0];
-        console.log(movieObject);
         setReturnedMovie(movieObject);
         // The title that gets sent to the book api
         const title = response.data.results[0].title;
@@ -144,7 +143,6 @@ function App() {
           },
         }).then((response) => {
           const bookObject = response.data.items[0].volumeInfo;
-          console.log(bookObject);
           if (bookObject.authors === undefined || bookObject.authors[0] === undefined) {
             bookObject.authors[0] = []
             bookObject.authors[0] = 'No Author'
