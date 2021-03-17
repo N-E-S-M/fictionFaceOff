@@ -147,20 +147,23 @@ button {
 
     .icon {
       font-size: 10rem;
-      color: $lightOrange;
+      color: $darkerOrange;
       position: absolute;
+      // background: white;
+      // padding: 10px;
+      // border-radius: 10%;
     }
 
     .filmIcon {
-      transform: rotate(30deg);
+      transform: rotate(-20deg);
       top: 0px;
-      right: -40px;
+      left: -20px;
     }
 
     .bookIcon {
-      transform: rotate(-30deg);
+      transform: rotate(20deg);
       top: 0px;
-      left: -40px;
+      right: -20px;
     }
 }
 

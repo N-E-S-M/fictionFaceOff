@@ -37,8 +37,10 @@ function ResultContainer(props) {
 						<button onClick={handleCardClick}>Go back</button>
 					</div>
 			</ReactCardFlip>
-      <FontAwesomeIcon icon={faFilm} className="icon filmIcon" />
-      <FontAwesomeIcon icon={faBook} className="icon bookIcon" />
+      <FontAwesomeIcon icon={faFilm} className="icon filmIcon" aria-hidden="true" title="Film section" />
+      {/* <span className="srOnly">Film section</span> */}
+      <FontAwesomeIcon icon={faBook} className="icon bookIcon" aria-hidden="true" title="Book section" />
+      {/* <span className="srOnly">Book section</span> */}
       </>
 		)
 }
