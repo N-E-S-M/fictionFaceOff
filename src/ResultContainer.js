@@ -1,5 +1,6 @@
 import ReactCardFlip from 'react-card-flip';
 import { useState } from "react";
+import StarSVG from './StarSVG';
 
 function ResultContainer(props) {
 	const {
@@ -23,10 +24,11 @@ function ResultContainer(props) {
 			<ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal"> 
 					<div className={outcome}>
 						<h2 className="mediaTitle">{name}</h2>
+						<button onClick={handleCardClick}>Read More ></button>
 						<p className="author">{author}</p>
 						<div className="imageContainer"><img className="image" src={img} alt={altDescription}/></div>
-						<button onClick={handleCardClick}>Description</button>
-						<p className="rating">{rating}</p>
+						<StarSVG className="star"/>
+							<p className="rating">{rating}</p>
 					</div>
 
 					<div className="back">

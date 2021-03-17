@@ -82,32 +82,14 @@ form {
 
 // Modal Box
 
-// .modalContainer {
-// }
-
-// .customModal {
-//   background: $lightOrange;
-//   width: 100%;
-// }
-
-// .customOverlay {
-//   background: $lightOrange;
-// }
-
 .react-responsive-modal-modal {
-  z-index: 10;
   background: $lightOrange !important;
   width: 60%;
   height: 80%;
   max-width: 850px;
   min-width: 350px;
-  // display: inline-block;
-  // text-align: left;
-  // vertical-align: middle;
-  // box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.25);
   margin: 20px;
   padding: 0;
-  // position: relative;
   overflow-y: none;
   display: flex;
   flex-direction: column;
@@ -121,16 +103,6 @@ form {
     align-items: center;
     height: 100%;
     padding: 20px;
-    // background-color: $lightOrange;
-
-    // p:first-of-type {
-    //   margin: 10px;
-    // }
-
-    // p {
-    //   @include bodyText(1.5rem);
-    //   color: $darkerBlue;
-    // }
 
     p {
       font-family: $bodyText;
@@ -263,19 +235,47 @@ div.back {
 }
 
 p.rating {
-  @include headerFont(3rem);
-  color: $lightOrange;
-  margin: 30px 0 10px;
+    @include headerFont(3rem);
+    color: $lightOrange;
+    z-index: 1;
+    position: absolute;
+    bottom: 35px;
 }
 
 .winner {
-  border: 7px solid $yellow;
+    border: 7px solid $yellow;
+
+    .rating {
+        color: $winner;
+    }
 }
 
-.loser,
-.tie {
-  border: 7px solid $text;
+.loser, .tie {
+	border: 7px solid $text;
+
+    .star {
+        opacity: 0;
+    }
 }
+
+.star {
+    opacity: 1;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    bottom: -50px;
+    animation: rotation 15s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
 
 footer {
   margin-top: auto;
