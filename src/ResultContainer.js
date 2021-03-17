@@ -38,9 +38,9 @@ function ResultContainer(props) {
 					</div>
 			</ReactCardFlip>
       <FontAwesomeIcon icon={faFilm} className="icon filmIcon" aria-hidden="true" title="Film section" />
-      {/* <span className="srOnly">Film section</span> */}
+      <span className="srOnly">Film section</span>
       <FontAwesomeIcon icon={faBook} className="icon bookIcon" aria-hidden="true" title="Book section" />
-      {/* <span className="srOnly">Book section</span> */}
+      <span className="srOnly">Book section</span>
       </>
 		)
 }
