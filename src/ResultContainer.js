@@ -24,7 +24,7 @@ function ResultContainer(props) {
 			<ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal"> 
 					<div className={outcome}>
 						<h2 className="mediaTitle">{name}</h2>
-						<button onClick={handleCardClick}>Read More ></button>
+						<button className="readMore" onClick={handleCardClick}>Read More</button>
 						<p className="author">{author}</p>
 						<div className="imageContainer"><img className="image" src={img} alt={altDescription}/></div>
 						<StarSVG className="star"/>
