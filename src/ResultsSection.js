@@ -1,8 +1,7 @@
 import ResultContainer from './ResultContainer'
+
 function ResultsSection({results}) {
 		
-
-
 	return (
 		
 		<section className="resultsSection">

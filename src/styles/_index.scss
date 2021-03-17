@@ -86,6 +86,7 @@ button {
     align-items: flex-start;
     height: 65vh;
     min-height: 500px;
+    position: relative;
 
     .react-card-flip {
         width: 45%;
@@ -142,6 +143,24 @@ button {
         &:focus {
             border: 1px solid $lightOrange;
         }
+    }
+
+    .icon {
+      font-size: 10rem;
+      color: $lightOrange;
+      position: absolute;
+    }
+
+    .filmIcon {
+      transform: rotate(30deg);
+      top: 0px;
+      right: -40px;
+    }
+
+    .bookIcon {
+      transform: rotate(-30deg);
+      top: 0px;
+      left: -40px;
     }
 }
 
