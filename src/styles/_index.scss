@@ -4,6 +4,10 @@
   margin: 0 auto;
 }
 
+button, a, input {
+  transition: all 0.3s ease-in-out;
+}
+
 .flexContainer {
   display: flex;
   flex-direction: column;
@@ -63,10 +67,10 @@ form {
     outline: none;
     background-color: $blue;
 
-    // &:focus,
-    // &:hover {
-    //   background-color: lighten($blue, 10%);
-    // }
+    &:focus,
+    &:hover {
+      background-color: lighten($blue, 10%);
+    }
   }
 
   ::placeholder {
@@ -242,6 +246,7 @@ form {
   img {
     height: calc(14rem + 8vw);
     object-fit: cover;
+    max-height: 235px;
     margin: 20px 0 20px;
   }
 }
