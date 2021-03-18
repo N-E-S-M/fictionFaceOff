@@ -56,6 +56,15 @@ function App() {
         matchedBook[0].volumeInfo.authors[0] = 'No Author'
       }
 
+      if (
+        matchedBook[0].volumeInfo.industryIdentifiers === undefined ||
+        matchedBook[0].volumeInfo.industryIdentifiers[0] === undefined
+      ) {
+        matchedBook[0].volumeInfo.industryIdentifiers = [];
+        matchedBook[0].volumeInfo.industryIdentifiers[0] = {};
+        matchedBook[0].volumeInfo.industryIdentifiers[0].identifier = 643687564654;
+      }
+
       if (matchedBook[0].volumeInfo.imageLinks === undefined || matchedBook[0].volumeInfo.imageLinks.thumbnail === undefined) {
         matchedBook[0].volumeInfo.imageLinks = {}
         matchedBook[0].volumeInfo.imageLinks.thumbnail = 'No Image'
@@ -149,8 +158,18 @@ function App() {
         }).then((response) => {
           const bookObject = response.data.items[0].volumeInfo;
           if (bookObject.authors === undefined || bookObject.authors[0] === undefined) {
+            bookObject.authors = []
             bookObject.authors[0] = []
             bookObject.authors[0] = 'No Author'
+          }
+
+          if (
+            bookObject.industryIdentifiers === undefined ||
+            bookObject.industryIdentifiers[0] === undefined
+          ) {
+            bookObject.industryIdentifiers = [];
+            bookObject.industryIdentifiers[0] = {};
+            bookObject.industryIdentifiers[0].identifier = 643687564654;
           }
 
           if (bookObject.imageLinks === undefined || bookObject.imageLinks.thumbnail === undefined) {
