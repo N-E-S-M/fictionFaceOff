@@ -14,7 +14,7 @@
 
 header {
   h1 {
-    @include headerFont(calc(4rem + 3.5vw));
+    @include headerFont(calc(3rem + 3.5vw));
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: lighten($blue, 30%);
     text-shadow: 3px 3px 0px $darkerText;
@@ -23,11 +23,12 @@ header {
   }
 
   h2 {
-      font-family: $bodyText;
-      font-size: 1.6rem;
-      text-align: center;
-      margin-bottom: 8px;
-      font-weight: 400;
+    font-family: $bodyText;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 8px;
+    font-weight: 400;
+    padding: 8px 0;
   }
 
   span {
@@ -62,14 +63,14 @@ form {
     outline: none;
     background-color: $blue;
 
-    &:focus,
-    &:hover {
-      background-color: lighten($blue, 10%);
-    }
+    // &:focus,
+    // &:hover {
+    //   background-color: lighten($blue, 10%);
+    // }
   }
 
   ::placeholder {
-    opacity: 1;
+    opacity: 0.8;
   }
 
   button {
@@ -86,14 +87,10 @@ form {
     &:hover,
     &:focus {
       background-color: $text;
-      border: 1px solid $darkerOrange;
     }
   }
 }
 
-.marqueeContainer {
-    overflow: hidden;
-}
 // Modal Box
 
 .react-responsive-modal-modal {
@@ -126,7 +123,7 @@ form {
       display: block;
 
       &.returnSearch {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
 
         span {
           font-weight: bolder;
@@ -135,7 +132,7 @@ form {
 
       &.narrowSearch {
         font-size: calc(0.8rem + 1vw);
-        margin-top: 25px;
+        padding: 25px;
       }
     }
 
@@ -158,12 +155,11 @@ form {
       }
 
       p.buttonTitle {
-          font-size: 2.2rem;
-        }
+        font-size: 2.2rem;
+      }
     }
   }
 }
-
 
 // Results Section
 
@@ -182,7 +178,6 @@ form {
     margin: 25px;
     max-height: 600px;
     min-height: 500px;
-    
   }
 
   .icon {
@@ -219,20 +214,20 @@ form {
   }
 
   h3 {
-      position: absolute;
-      top: -25px;
-      font-size: 2.7rem;
-      text-transform: uppercase;
-      font-style: italic;
-      color: $darkerBlue;
-        padding: 0 10px 0 5px;
+    position: absolute;
+    top: -25px;
+    font-size: 2.7rem;
+    text-transform: uppercase;
+    font-style: italic;
+    color: $darkerBlue;
+    padding: 0 10px 0 5px;
   }
 
   h2 {
     font-size: 3rem;
     text-align: center;
     height: 35px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   p {
@@ -247,26 +242,23 @@ form {
   img {
     height: calc(14rem + 8vw);
     object-fit: cover;
-    margin: 30px 0 20px;
+    margin: 20px 0 20px;
   }
-
 }
 
 button.readMore {
-    font-size: 2rem;
-    color: $text;
-    background-color: $darkerBlue;
-    border: none;
-    margin-top: 30px;
+  font-size: 1.8rem;
+  color: $text;
+  background-color: $darkerBlue;
+  border: none;
+  border-top: 1px solid $text;
+  padding: 5px;
+  margin-top: 10px;
 
-    &:hover,
-    &:focus {
-        color: darken($text, 20%);
-    }
-
-    &:focus {
-        outline: 1px solid darken($text, 20%);
-    }
+  &:hover,
+  &:focus {
+    color: $lightOrange;
+  }
 }
 
 div.back {
@@ -281,76 +273,75 @@ div.back {
     /* Hide scrollbar for IE, Edge and Firefox */
     &:-webkit-scrollbar {
       display: none;
-    }  
+    }
   }
 
   button {
-      font-size: 2rem;
-        color: $text;
-        background-color: $darkerBlue;
-        border: none;
-        margin-top: auto;
+    font-size: 1.8rem;
+    color: $text;
+    background-color: $darkerBlue;
+    border: none;
+    border-top: 1px solid $text;
+    padding: 5px;
+    margin-top: 10px;
+    margin-top: auto;
 
-        &:hover,
-        &:focus {
-            color: darken($text, 20%);
-        }
-
-        &:focus {
-            outline: 1px solid darken($text, 20%);
-        }
+    &:hover,
+    &:focus {
+      color: $lightOrange;
+    }
   }
 }
 
 p.rating {
-    @include headerFont(3rem);
-    color: $lightOrange;
-    z-index: 1;
-    position: absolute;
-    bottom: 35px;
+  @include headerFont(3rem);
+  color: $lightOrange;
+  z-index: 1;
+  position: absolute;
+  bottom: 35px;
 }
 
 .wins {
-    border: 7px solid $yellow;
+  border: 7px solid $yellow;
 
-    h3 {
-        background-color: $yellow;
-    }
+  h3 {
+    background-color: $yellow;
+  }
 
-    .rating {
-        color: $winner;
-    }
+  .rating {
+    color: $winner;
+  }
 }
 
-.loses, .tie {
-	border: 7px solid $text;
-    h3 {
-        background-color: $text;
-    }
+.loses,
+.tie {
+  border: 7px solid $text;
+  h3 {
+    background-color: $text;
+  }
 
-    .star {
-        opacity: 0;
-    }
+  .star {
+    opacity: 0;
+  }
 }
 
 .star {
-    opacity: 1;
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    bottom: -50px;
-    animation: rotation 15s infinite linear;
+  opacity: 1;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  animation: rotation 15s infinite linear;
 }
 
 @keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg)
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
 
 footer {
   margin-top: auto;
