@@ -34,7 +34,6 @@ function App() {
   ]);
 
   const [searchMultipleBooks, setSearchMultipleBooks] = useState([]);
-  const [returnedBooks, setReturnedBooks] = useState([]);
   const [returnedMovie, setReturnedMovie] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -49,54 +48,53 @@ function App() {
 
     //taking user's button book choice
     if (clickedButton) {
-      const matchedBook = returnedBooks.filter((item) => {
-        return item.volumeInfo.title === clickedButton;
+      const matchedBook = searchMultipleBooks.filter((item) => {
+        return item.title === clickedButton;
       });
-      
       //error handling for missing API data
 
-      if (matchedBook[0].volumeInfo.authors === undefined || matchedBook[0].volumeInfo.authors[0] === undefined) {
-        matchedBook[0].volumeInfo.authors = []
-        matchedBook[0].volumeInfo.authors[0] = 'No Author'
+      if (matchedBook[0].authors === undefined || matchedBook[0].authors[0] === undefined) {
+        matchedBook[0].authors = []
+        matchedBook[0].authors[0] = 'No Author'
       }
 
       if (
-        matchedBook[0].volumeInfo.industryIdentifiers === undefined ||
-        matchedBook[0].volumeInfo.industryIdentifiers[0] === undefined
+        matchedBook[0].industryIdentifiers === undefined ||
+        matchedBook[0].industryIdentifiers[0] === undefined
       ) {
-        matchedBook[0].volumeInfo.industryIdentifiers = [];
-        matchedBook[0].volumeInfo.industryIdentifiers[0] = {};
-        matchedBook[0].volumeInfo.industryIdentifiers[0].identifier = 643687564654;
+        matchedBook[0].industryIdentifiers = [];
+        matchedBook[0].industryIdentifiers[0] = {};
+        matchedBook[0].industryIdentifiers[0].identifier = 643687564654;
       }
 
-      if (matchedBook[0].volumeInfo.imageLinks === undefined || matchedBook[0].volumeInfo.imageLinks.thumbnail === undefined) {
-        matchedBook[0].volumeInfo.imageLinks = {}
-        matchedBook[0].volumeInfo.imageLinks.thumbnail = 'No Image'
+      if (matchedBook[0].imageLinks === undefined || matchedBook[0].imageLinks.thumbnail === undefined) {
+        matchedBook[0].imageLinks = {}
+        matchedBook[0].imageLinks.thumbnail = 'No Image'
       }
 
       // conditional classes for win or loss
 
-      if (matchedBook[0].volumeInfo.averageRating === undefined) {
-        matchedBook[0].volumeInfo.averageRating = "not rated";
-        matchedBook[0].volumeInfo.outcome = "loses";
+      if (matchedBook[0].averageRating === undefined) {
+        matchedBook[0].averageRating = "not rated";
+        matchedBook[0].outcome = "loses";
         movieOutcome = "wins";
       } else if (
         returnedMovie.vote_average / 2 >
-        matchedBook[0].volumeInfo.averageRating
+        matchedBook[0].averageRating
       ) {
-        matchedBook[0].volumeInfo.outcome = "loses";
+        matchedBook[0].outcome = "loses";
         movieOutcome = "wins";
       } else if (
         returnedMovie.vote_average / 2 <
-        matchedBook[0].volumeInfo.averageRating
+        matchedBook[0].averageRating
       ) {
-        matchedBook[0].volumeInfo.outcome = "wins";
+        matchedBook[0].outcome = "wins";
         movieOutcome = "loses";
       } else if (
         returnedMovie.vote_average / 2 ===
-        matchedBook[0].volumeInfo.averageRating
+        matchedBook[0].averageRating
       ) {
-        matchedBook[0].volumeInfo.outcome = "tie";
+        matchedBook[0].outcome = "tie";
         movieOutcome = "tie";
       }
 
@@ -116,14 +114,14 @@ function App() {
 
         {
           type: "book",
-          name: matchedBook[0].volumeInfo.title,
-          author: matchedBook[0].volumeInfo.authors[0],
-          description: matchedBook[0].volumeInfo.description,
-          rating: `${matchedBook[0].volumeInfo.averageRating}/5`,
-          img: matchedBook[0].volumeInfo.imageLinks.thumbnail,
-          altDescription: `${matchedBook[0].volumeInfo.title} cover`,
-          id: matchedBook[0].volumeInfo.industryIdentifiers[0].identifier,
-          outcome: matchedBook[0].volumeInfo.outcome,
+          name: matchedBook[0].title,
+          author: matchedBook[0].authors[0],
+          description: matchedBook[0].description,
+          rating: `${matchedBook[0].averageRating}/5`,
+          img: matchedBook[0].imageLinks.thumbnail,
+          altDescription: `${matchedBook[0].title} cover`,
+          id: matchedBook[0].industryIdentifiers[0].identifier,
+          outcome: matchedBook[0].outcome,
         },
       ]);
     }
@@ -276,7 +274,6 @@ function App() {
               //set state for user to choose matching book 
 
               setSearchMultipleBooks(newBooksArray);
-              setReturnedBooks(multipleBooks);
 
               //Modal
 
