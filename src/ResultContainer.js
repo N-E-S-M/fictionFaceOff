@@ -17,7 +17,7 @@ function ResultContainer(props) {
   } = props;
 
   // state for card flip on click
-  
+
   const [isFlipped, setIsFlipped] = useState(false);
 
   function handleCardClick(e) {
@@ -45,12 +45,15 @@ function ResultContainer(props) {
             ? null
             : <StarSVG className="star" />
           }
-          
-          {rating === "not rated/5" ? (
-            <p className="rating">not rated</p>
-          ) : (
-            <p className="rating">{rating}</p>
-          )}
+
+          {
+			rating === "not rated/5" 
+			? (
+				<p className="rating">not rated</p>
+			) : (
+				<p className="rating">{rating}</p>
+			)
+		  }
         </div>
         <div className="back">
           <h2 className="mediaTitle">{name}</h2>
