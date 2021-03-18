@@ -38,7 +38,12 @@ function ResultContainer(props) {
           <div className="imageContainer">
             <img className="image" src={img} alt={altDescription} />
           </div>
-          <StarSVG className="star" />
+          {
+            isFlipped
+            ? null
+            : <StarSVG className="star" />
+          }
+          
           {rating === "not rated/5" ? (
             <p className="rating">not rated</p>
           ) : (

@@ -4,7 +4,9 @@
   margin: 0 auto;
 }
 
-button, a, input {
+button,
+a,
+input {
   transition: all 0.3s ease-in-out;
 }
 
@@ -270,8 +272,17 @@ div.back {
   p {
     padding: 30px 20px;
     overflow-y: scroll;
-    height: 400px;
+    height: 300px;
     scrollbar-color: $darkerOrange $darkerBlue;
+  }
+
+  p::-webkit-scrollbar {
+    background-color: $darkerBlue;
+    width: 1rem;
+  }
+
+  p::-webkit-scrollbar-thumb {
+    background-color: $darkerOrange;
   }
 
   button {
