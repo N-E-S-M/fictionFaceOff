@@ -7,7 +7,7 @@ import Loading from "./Loading.js";
 import "./App.scss";
 
 function App() {
-  // App state
+  // setting state from userInput and Api results 
   const [userInput, setUserInput] = useState("");
   const [results, setResults] = useState([
     {
@@ -32,24 +32,28 @@ function App() {
       outcome: "",
     },
   ]);
+
   const [searchMultipleBooks, setSearchMultipleBooks] = useState([]);
   const [returnedBooks, setReturnedBooks] = useState([]);
   const [returnedMovie, setReturnedMovie] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  // Modal state
   const [open, setOpen] = useState(false);
   const onCloseModal = () => setOpen(false);
 
+  //function to handle no exact match to search term
   const handleBookChoice = (clickedButton) => {
     setUserInput("");
     onCloseModal();
 
     let movieOutcome = "";
 
+    //taking user's button book choice
     if (clickedButton) {
       const matchedBook = returnedBooks.filter((item) => {
         return item.volumeInfo.title === clickedButton;
       });
+      
+      //error handling for missing API data
 
       if (matchedBook[0].volumeInfo.authors === undefined || matchedBook[0].volumeInfo.authors[0] === undefined) {
         matchedBook[0].volumeInfo.authors = []
@@ -69,6 +73,8 @@ function App() {
         matchedBook[0].volumeInfo.imageLinks = {}
         matchedBook[0].volumeInfo.imageLinks.thumbnail = 'No Image'
       }
+
+      // conditional classes for win or loss
 
       if (matchedBook[0].volumeInfo.averageRating === undefined) {
         matchedBook[0].volumeInfo.averageRating = "not rated";
@@ -93,6 +99,8 @@ function App() {
         matchedBook[0].volumeInfo.outcome = "tie";
         movieOutcome = "tie";
       }
+
+      //organizing and pushing results to state
 
       setResults([
         {
@@ -121,11 +129,15 @@ function App() {
     }
   };
 
+  //handle submit of user title search 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchMultipleBooks([]);
     setIsLoading(true);
+
     // First API Call (MovieDB)
+
     axios({
       method: "GET",
       url: `https://api.themoviedb.org/3/search/movie?`,
@@ -141,10 +153,10 @@ function App() {
       .then((response) => {
         const movieObject = response.data.results[0];
         setReturnedMovie(movieObject);
-        // The title that gets sent to the book api
         const title = response.data.results[0].title;
 
         // Second API Call (Google Books)
+
         axios({
           method: "GET",
           url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -157,6 +169,9 @@ function App() {
           },
         }).then((response) => {
           const bookObject = response.data.items[0].volumeInfo;
+
+          //error handling for missing API data
+
           if (bookObject.authors === undefined || bookObject.authors[0] === undefined) {
             bookObject.authors = []
             bookObject.authors[0] = []
@@ -176,6 +191,8 @@ function App() {
           bookObject.imageLinks = {}
           bookObject.imageLinks.thumbnail = 'No Image'
           }
+
+          //conditional rendering to set win and lose class
 
           if (title === bookObject.title) {
             setIsLoading(false);
@@ -203,7 +220,11 @@ function App() {
               movieObject.outcome = "tie";
             }
 
+            //clearing form input 
+
             setUserInput("");
+
+            //organizing and pushing results to state if an exact match between two APIs
 
             setResults([
               {
@@ -231,6 +252,9 @@ function App() {
             ]);
           } else if (title !== bookObject.title) {
             setIsLoading(false);
+
+            //third API call (Google Books) if no exact match to get a list of books for user
+
             axios({
               method: "GET",
               url: `https://www.googleapis.com/books/v1/volumes?`,
@@ -248,8 +272,14 @@ function App() {
               const newBooksArray = multipleBooks.slice(0, size).map((book) => {
                 return book.volumeInfo;
               });
+
+              //set state for user to choose matching book 
+
               setSearchMultipleBooks(newBooksArray);
               setReturnedBooks(multipleBooks);
+
+              //Modal
+
               setOpen(true);
             });
           }

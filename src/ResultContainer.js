@@ -16,6 +16,8 @@ function ResultContainer(props) {
     outcome,
   } = props;
 
+  // state for card flip on click
+  
   const [isFlipped, setIsFlipped] = useState(false);
 
   function handleCardClick(e) {

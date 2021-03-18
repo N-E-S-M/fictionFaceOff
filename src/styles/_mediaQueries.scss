@@ -10,6 +10,7 @@
 }
 
 @media (max-width: 900px) {
+    
     .resultsSection {
         flex-direction: column;
         align-items: center;
@@ -34,17 +35,18 @@
 @media (max-width: 650px) {
 
     .resultsSection {
+
         h2 {
             font-size: 2.5rem;
-            // margin-bottom: 30px;
         }
-
     }
+
 }
 
 @media (max-width: 475px) {
 
   .resultsSection {
+
     h2 {
       height: auto;
     }
@@ -89,19 +91,21 @@
     }
     
     header {
+
         h1 {
             font-size: 4rem;
           }
     }
 
-   
 }
 
 @media (prefers-reduced-motion: reduce), (update: slow) {
+
   * {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     }
+    
 }
 

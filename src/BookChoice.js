@@ -9,6 +9,7 @@ const BookChoice = ({ bookInfo, handleBookChoice, returnedMovieTitle, open, onCl
           Your search returned "<span>{returnedMovieTitle}</span>". Please
           select the matching book:
         </p>
+
         {bookInfo.map((book, index) => {
           return (
             <button

@@ -1,3 +1,17 @@
+//Global Styles 
+
+html {
+  font-size: 62.5%;
+  background-color: $blue;
+  color: $text;
+  font-family: $bodyText;
+}
+
+body * {
+  margin: 0;
+  padding: 0;
+}
+
 .wrapper {
   width: 90%;
   max-width: 1200px;
@@ -18,7 +32,11 @@ input {
   min-height: 100vh;
 }
 
+//header Styles 
+
 header {
+  margin: 10px;
+
   h1 {
     @include headerFont(calc(3rem + 3.5vw));
     -webkit-text-stroke-width: 1px;
@@ -36,12 +54,9 @@ header {
     font-weight: 400;
     padding: 8px 0;
   }
-
-  span {
-    @include headerFont(calc(1rem + 4vw));
-  }
-  margin: 10px;
 }
+
+//main styles 
 
 main {
   height: 100%;
@@ -204,6 +219,8 @@ form {
     right: -5px;
   }
 
+  //immediate parent to results content 
+
   div.wins,
   div.loses,
   div.back {
@@ -232,7 +249,6 @@ form {
   h2 {
     font-size: 3rem;
     text-align: center;
-    // height: 35px;
     margin-bottom: 10px;
   }
 
@@ -267,6 +283,8 @@ button.readMore {
     color: $lightOrange;
   }
 }
+
+//back side of results cards
 
 div.back {
   p {
@@ -310,6 +328,8 @@ p.rating {
   bottom: 35px;
 }
 
+//wins class styles 
+
 .wins {
   border: 7px solid $yellow;
 
@@ -322,6 +342,8 @@ p.rating {
   }
 }
 
+//loses + tie class styles
+
 .loses,
 .tie {
   border: 7px solid $text;
@@ -333,6 +355,8 @@ p.rating {
     opacity: 0;
   }
 }
+
+//SVG styles 
 
 .star {
   opacity: 1;
