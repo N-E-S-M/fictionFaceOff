@@ -63,20 +63,20 @@ function App() {
 
       if (matchedBook[0].volumeInfo.averageRating === undefined) {
         matchedBook[0].volumeInfo.averageRating = "not rated";
-        matchedBook[0].volumeInfo.outcome = "loser";
-        movieOutcome = "winner";
+        matchedBook[0].volumeInfo.outcome = "loses";
+        movieOutcome = "wins";
       } else if (
         returnedMovie.vote_average / 2 >
         matchedBook[0].volumeInfo.averageRating
       ) {
-        matchedBook[0].volumeInfo.outcome = "loser";
-        movieOutcome = "winner";
+        matchedBook[0].volumeInfo.outcome = "loses";
+        movieOutcome = "wins";
       } else if (
         returnedMovie.vote_average / 2 <
         matchedBook[0].volumeInfo.averageRating
       ) {
-        matchedBook[0].volumeInfo.outcome = "winner";
-        movieOutcome = "loser";
+        matchedBook[0].volumeInfo.outcome = "wins";
+        movieOutcome = "loses";
       } else if (
         returnedMovie.vote_average / 2 ===
         matchedBook[0].volumeInfo.averageRating
@@ -162,20 +162,20 @@ function App() {
             setIsLoading(false);
             if (bookObject.averageRating === undefined) {
               bookObject.averageRating = "not rated";
-              bookObject.outcome = "loser";
-              movieObject.outcome = "winner";
+              bookObject.outcome = "loses";
+              movieObject.outcome = "wins";
             } else if (
               movieObject.vote_average / 2 >
               bookObject.averageRating
             ) {
-              bookObject.outcome = "loser";
-              movieObject.outcome = "winner";
+              bookObject.outcome = "loses";
+              movieObject.outcome = "wins";
             } else if (
               movieObject.vote_average / 2 <
               bookObject.averageRating
             ) {
-              bookObject.outcome = "winner";
-              movieObject.outcome = "loser";
+              bookObject.outcome = "wins";
+              movieObject.outcome = "loses";
             } else if (
               movieObject.vote_average / 2 ===
               bookObject.averageRating
@@ -257,6 +257,7 @@ function App() {
           handleSubmit={handleSubmit}
           setUserInput={setUserInput}
         />
+        
 
         {
           isLoading

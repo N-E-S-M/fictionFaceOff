@@ -91,6 +91,9 @@ form {
   }
 }
 
+.marqueeContainer {
+    overflow: hidden;
+}
 // Modal Box
 
 .react-responsive-modal-modal {
@@ -200,8 +203,8 @@ form {
     right: -5px;
   }
 
-  div.winner,
-  div.loser,
+  div.wins,
+  div.loses,
   div.back {
     display: flex;
     flex-direction: column;
@@ -307,7 +310,7 @@ p.rating {
     bottom: 35px;
 }
 
-.winner {
+.wins {
     border: 7px solid $yellow;
 
     h3 {
@@ -319,7 +322,7 @@ p.rating {
     }
 }
 
-.loser, .tie {
+.loses, .tie {
 	border: 7px solid $text;
     h3 {
         background-color: $text;
