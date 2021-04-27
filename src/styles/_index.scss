@@ -1,4 +1,4 @@
-//Global Styles 
+//Global Styles
 
 html {
   font-size: 62.5%;
@@ -32,18 +32,20 @@ input {
   min-height: 100vh;
 }
 
-//header Styles 
+//header Styles
 
 header {
   margin: 10px;
 
   h1 {
     @include headerFont(calc(3rem + 3.5vw));
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: lighten($blue, 30%);
-    text-shadow: 3px 3px 0px $darkerText;
-    margin-bottom: 5px;
+    letter-spacing: 1.2px;
+    margin-top: 15px;
     text-align: center;
+  }
+
+  .highlight {
+    color: $yellow;
   }
 
   h2 {
@@ -56,7 +58,7 @@ header {
   }
 }
 
-//main styles 
+//main styles
 
 main {
   height: 100%;
@@ -77,16 +79,17 @@ form {
     width: 60%;
     padding: 10px;
     margin-bottom: 5px;
-    font-size: 1.9rem;
+    font-size: 1.8rem;
     letter-spacing: 0.8px;
     color: $text;
-    border: 1px solid $lightOrange;
+    border: none;
+    border-bottom: 2px solid $lightOrange;
     outline: none;
     background-color: $blue;
 
     &:focus,
     &:hover {
-      background-color: lighten($blue, 10%);
+      background-color: lighten($blue, 3%);
     }
   }
 
@@ -95,19 +98,20 @@ form {
   }
 
   button {
+    font-family: $bodyText;
+    font-weight: bolder;
     height: 40px;
-    width: 25%;
+    width: 20%;
     min-width: 120px;
     margin-left: 10px;
-    padding: 0 35px;
     font-size: 1.9rem;
-    color: $blue;
+    color: $darkerBlue;
     border: 1px solid transparent;
-    background-color: $darkerOrange;
+    background-color: $text;
 
     &:hover,
     &:focus {
-      background-color: $text;
+      background-color: $darkerOrange;
     }
   }
 }
@@ -168,7 +172,7 @@ form {
 
       &:hover,
       &:focus {
-        background: darken($text, 20%);
+        background: darken($text, 10%);
       }
 
       p {
@@ -219,7 +223,7 @@ form {
     right: -5px;
   }
 
-  //immediate parent to results content 
+  //immediate parent to results content
 
   div.wins,
   div.loses,
@@ -247,7 +251,7 @@ form {
   }
 
   h2 {
-    font-size: 3rem;
+    font-size: 2.7rem;
     text-align: center;
     margin-bottom: 10px;
   }
@@ -328,7 +332,7 @@ p.rating {
   bottom: 35px;
 }
 
-//wins class styles 
+//wins class styles
 
 .wins {
   border: 7px solid $yellow;
@@ -356,15 +360,15 @@ p.rating {
   }
 }
 
-//SVG styles 
+//SVG styles
 
 .star {
   opacity: 1;
   position: absolute;
-  width: 200px;
+  width: 180px;
   height: 200px;
   bottom: -50px;
-  animation: rotation 15s infinite linear;
+  animation: rotation 50s infinite linear;
 }
 
 @keyframes rotation {
@@ -382,7 +386,7 @@ footer {
   height: 50px;
   width: 100%;
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 
   a {
     text-decoration: none;

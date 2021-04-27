@@ -1,111 +1,103 @@
 @media (max-width: 1100px) {
-
-    .resultsSection{
-
-        .react-card-flip {
-            min-width: 350px;
-            max-height: 550px;
-        }
+  .resultsSection {
+    .react-card-flip {
+      min-width: 350px;
+      max-height: 550px;
     }
+  }
 }
 
 @media (max-width: 900px) {
-    
-    .resultsSection {
-        flex-direction: column;
-        align-items: center;
-        height: auto;
+  header {
+    h1 {
+      @include headerFont(calc(3rem + 4.5vw));
+    }
+    h2 {
+      font-size: 1.9rem;
+    }
+  }
 
-        h2 {
-            height: 50px;
-        }
+  .resultsSection {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
 
-        .react-card-flip {
-            width: 70%;
-            margin-top: 50px;
-        }
+    h2 {
+      height: 50px;
     }
 
-    .icon {
-        display: none;
+    .react-card-flip {
+      width: 70%;
+      margin-top: 50px;
     }
+  }
 
+  .icon {
+    display: none;
+  }
 }
 
 @media (max-width: 650px) {
-
-    .resultsSection {
-
-        h2 {
-            font-size: 2.5rem;
-        }
+  .resultsSection {
+    h2 {
+      font-size: 2.5rem;
     }
-
+  }
 }
 
 @media (max-width: 475px) {
-
   .resultsSection {
-
     h2 {
       height: auto;
     }
   }
 
-    form {
-        flex-direction: column;
-        min-width: 100%;
-        margin: 0 auto;
+  form {
+    flex-direction: column;
+    min-width: 100%;
+    margin: 0 auto;
 
-        input[type="text"] {
-            width: 100%;
-        }
-
-        button {
-            width: 100%;
-            margin-left: 0;
-        }
+    input[type="text"] {
+      width: 100%;
     }
 
-    .react-responsive-modal-modal {
-      width: 100%;
-      height: 100%;
+    button {
+      width: 100%;  
+      margin: 10px 0 10px;
+    }
+  }
 
-      .buttonContainer {
-        button {
-          width: 100%;
-        }
+  .react-responsive-modal-modal {
+    width: 100%;
+    height: 100%;
+
+    .buttonContainer {
+      button {
+        width: 100%;
       }
     }
+  }
 }
 
-
 @media (max-width: 400px) {
-
-    .resultsSection{
-
-        .react-card-flip {
-            min-width: 300px;
-            max-height: 550px;
-        }
+  .resultsSection {
+    .react-card-flip {
+      min-width: 300px;
+      max-height: 550px;
     }
-    
-    header {
+  }
 
-        h1 {
-            font-size: 4rem;
-          }
+  header {
+    h1 {
+      font-size: 5rem;
     }
-
+  }
 }
 
 @media (prefers-reduced-motion: reduce), (update: slow) {
-
   * {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    }
-    
+  }
 }
-

@@ -290,11 +290,11 @@ function App() {
   };
 
   return (
-
     <div className="wrapper flexContainer">
-
       <header>
-        <h1>Fiction Face/Off</h1>
+        <h1>
+          Fiction <span className="highlight">Face/Off</span>
+        </h1>
         <h2>The debate is heated! Is the book or movie version better?!</h2>
       </header>
       <main>
@@ -303,37 +303,33 @@ function App() {
           handleSubmit={handleSubmit}
           setUserInput={setUserInput}
         />
-        
 
-        {
-          isLoading
-            ? <Loading />
-            :
-            <>
-              {
-                results[0].name !== ""
-                  ? <ResultsSection results={results} />
-                  : null
-              }
-            </>
-        }
-        {
-          searchMultipleBooks.length !== 0
-            ? <BookChoice
-              bookInfo={searchMultipleBooks}
-              handleBookChoice={handleBookChoice}
-              returnedMovieTitle={returnedMovie.title}
-              onCloseModal={onCloseModal}
-              open={open}
-            />
-            : null
-        }
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            {results[0].name !== "" ? (
+              <ResultsSection results={results} />
+            ) : null}
+          </>
+        )}
+        {searchMultipleBooks.length !== 0 ? (
+          <BookChoice
+            bookInfo={searchMultipleBooks}
+            handleBookChoice={handleBookChoice}
+            returnedMovieTitle={returnedMovie.title}
+            onCloseModal={onCloseModal}
+            open={open}
+          />
+        ) : null}
       </main>
       <footer>
-        <p>Created at <a href="https://junocollege.com/">Juno College</a> by Nathan, Steph, Mitch &amp; Emma</p>
+        <p>
+          Created at <a href="https://junocollege.com/">Juno College</a> by
+          Nathan, Steph, Mitch &amp; Emma
+        </p>
       </footer>
     </div>
-
   );
 }
 
